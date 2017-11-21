@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <link rel="stylesheet" href="css/reset.min.css">
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        /*--DIALOG--*/
+        .dialogBg {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 998;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            opacity: 0.3;
+            filter: alpha(opacity=30);
+        }
+
+        .dialogBox {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            z-index: 999;
+            /*
+            =>目标值:动画显示的目标值
+            margin-top: -250px;
+            margin-left: -200px;
+            width: 400px;
+            height: 500px;*/
+            margin-top: 0;
+            margin-left: 0;
+            width: 0;
+            height: 0;
+            background: #FFF;
+            overflow: hidden;
+        }
+
+        .dialogBox h2 {
+            line-height: 50px;
+            text-align: center;
+            background: #EEE;
+            overflow: hidden;
+        }
+
+        .dialogBox .close {
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background: lightblue;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+<a href="javascript:;" id="login">登录</a>
+
+<!--DIALOG-->
+<div class="dialogBg" id="dialogBg"></div>
+<div class="dialogBox" id="dialogBox">
+    <h2>模态框DIALOG</h2>
+    <a href="javascript:;" class="close">x</a>
+    <div class="con"></div>
+</div>
+
+<script src="js/utils.js"></script>
+<script src="js/animate.js"></script>
+<script src="js/3-2.js"></script>
+</body>
+</html>

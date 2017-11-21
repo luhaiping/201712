@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <link rel="stylesheet" href="css/reset.min.css">
+    <style>
+        .box {
+            position: absolute;
+            top: 300px;
+            left: 400px;
+            width: 100px;
+            height: 100px;
+            background: red;
+            border-radius: 50%;
+
+            /*animation: move 2s linear 0s infinite both;*/
+        }
+
+        @keyframes move {
+            0%, 100% {
+                top: 300px;
+                left: 400px;
+                background: red;
+                transform: scale(1);
+            }
+            25% {
+                top: 0;
+                left: 400px;
+                background: green;
+                transform: scale(1.5);
+            }
+            50% {
+                top: 0;
+                left: 800px;
+                background: orange;
+                transform: scale(1);
+            }
+            75% {
+                top: 300px;
+                left: 800px;
+                background: blue;
+                transform: scale(1.5);
+            }
+        }
+
+    </style>
+</head>
+<body>
+<div class="box" id="box"></div>
+
+<script src="js/utils.js"></script>
+<script src="js/animate.js"></script>
+<script src="js/2-3.js"></script>
+</body>
+</html>

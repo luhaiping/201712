@@ -1,0 +1,411 @@
+<!DOCTYPE html><html><head><title>JQ的基础语法、核心原理、及项目实战</title><meta charset='utf-8'><link href='https://dn-maxiang.qbox.me/res-min/themes/marxico.css' rel='stylesheet'><style>
+.note-content  {font-family: 'Helvetica Neue', Arial, 'Hiragino Sans GB', STHeiti, 'Microsoft YaHei', 'WenQuanYi Micro Hei', SimSun, Song, sans-serif;}
+
+</style></head><body><div id='preview-contents' class='note-content'>
+                        
+                    
+
+<h2 id="jq的基础语法核心原理及项目实战">JQ的基础语法、核心原理、及项目实战</h2>
+
+<p></p>
+
+
+
+<h3 id="jq的版本和下载">JQ的版本和下载</h3>
+
+<blockquote>
+  <p>jQuery (JQ) 的版本 <br>
+  1.x：兼容IE6~8浏览器，是目前PC端开发常用的类库 <br>
+  2.x / 3.x：不支持IE6~8的兼容了，目前市场上应用的特别少 (移动端开发一般我们都用zepto.js)</p>
+  
+  <p>jquery-1.9.1.min.js <br>
+  jquery-1.11.3.min.js <br>
+  jquery.min.js <br>
+  …</p>
+  
+  <p><strong>下载JQ</strong> <br>
+  官网下载：<a href="http://jquery.com/" target="_blank">http://jquery.com/</a> <br>
+  GitHub：<a href="https://github.com/jquery/jquery" target="_blank">https://github.com/jquery/jquery</a>  下载JQ的源码进行学习和分析 <br>
+  百度搜索或者在 <a href="http://code.jquery.com/jquery-1.11.1.min.js" target="_blank">http://code.jquery.com/jquery-1.11.1.min.js</a> （地址后面放入的是对应的JQ的版本号）</p>
+  
+  <p>基于NODE的NPM包管理器也可以下载JQ： <br>
+  <code>npm view jquery &gt; jquery.version.json</code> <br>
+  <code>npm install jquery</code> 下载最新版本JQ <br>
+  <code>npm install jquery@1.11.3</code> 下载指定版本JQ</p>
+  
+  <p><strong>如何学习JQ</strong> <br>
+  研究JQ的源码：研究的过程更多是学习JQ的精华，促进自己的原生JS能力以及插件或者类库的封装能力</p>
+  
+  <p>看JQ的API手册：<a href="http://jquery.cuishifeng.cn/" target="_blank">http://jquery.cuishifeng.cn/</a></p>
+  
+  <p>锋利的JQ第二版：对于JQ的基础知识和实战应用讲解的非常好</p>
+  
+  <p>看一些JQ的视频</p>
+  
+  <p>…</p>
+</blockquote>
+
+<h3 id="jq的核心原理解读分析原代码">JQ的核心原理解读（分析原代码）</h3>
+
+<blockquote>
+  <p>JQ是一个常用方法类库（常用的DOM库），提供了很多真实项目开发中需要使用的属性和方法（这些方法JQ已经帮我们完善了浏览器兼容处理以及一些细节的优化）</p>
+</blockquote>
+
+<p><code>jQuery本身是一个类 <br>
+JQ是基于构造函数模式构建的类库</code></p>
+
+<pre class="prettyprint with-line-number hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment line-number">1.</span><span class="hljs-keyword">var</span> jQuery=<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">selector,context</span>)</span>{
+</div><div class="hljs-line"><span class="hljs-comment line-number">2.</span>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> jQuery.fn.init(selector, context);
+</div><div class="hljs-line"><span class="hljs-comment line-number">3.</span>};
+</div><div class="hljs-line"><span class="hljs-comment line-number">4.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">5.</span>jQuery.fn=jQuery.prototype={
+</div><div class="hljs-line"><span class="hljs-comment line-number">6.</span>    <span class="hljs-attr">jquery</span>:version,
+</div><div class="hljs-line"><span class="hljs-comment line-number">7.</span>    <span class="hljs-attr">constructor</span>:jQuery,
+</div><div class="hljs-line"><span class="hljs-comment line-number">8.</span>    ...
+</div><div class="hljs-line"><span class="hljs-comment line-number">9.</span>};
+</div><div class="hljs-line"><span class="hljs-comment line-number">10.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">11.</span>...
+</div><div class="hljs-line"><span class="hljs-comment line-number">12.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">13.</span>init=jQuery.fn.init=<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">selector, context</span>)</span>{
+</div><div class="hljs-line"><span class="hljs-comment line-number">14.</span>    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">typeof</span> selector==<span class="hljs-string">"string"</span>){
+</div><div class="hljs-line"><span class="hljs-comment line-number">15.</span>        ...
+</div><div class="hljs-line"><span class="hljs-comment line-number">16.</span>    }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(selector.nodeType){
+</div><div class="hljs-line"><span class="hljs-comment line-number">17.</span>        ...
+</div><div class="hljs-line"><span class="hljs-comment line-number">18.</span>    }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(jQuery.isFunction(selector)){
+</div><div class="hljs-line"><span class="hljs-comment line-number">19.</span>        ...
+</div><div class="hljs-line"><span class="hljs-comment line-number">20.</span>    }
+</div><div class="hljs-line"><span class="hljs-comment line-number">21.</span>    <span class="hljs-keyword">return</span> jQuery.makeArray(selector,<span class="hljs-keyword">this</span> );<span class="hljs-comment">//=&gt;返回的是一个类数组</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">22.</span>}
+</div><div class="hljs-line"><span class="hljs-comment line-number">23.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">24.</span>init.prototype=jQuery.fn;
+</div><div class="hljs-line"><span class="hljs-comment line-number">25.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">26.</span>...
+</div><div class="hljs-line"><span class="hljs-comment line-number">27.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">28.</span>window.jQuery=<span class="hljs-built_in">window</span>.$=jQuery;
+</div></code></pre>
+
+<blockquote>
+  <p>当我们在JS中执行： <br>
+  <span>$</span>() <br>
+  jQuery()</p>
+  
+  <p>都是在创建一个JQ类的实例（$===jQuery），这些实例都是一个类数组（我们把这个类数组称之为JQ对象），JQ的实例可以使用JQ原型上提供的公有的属性和方法</p>
+  
+  <p>项目中我们把<span>$</span>()称之为JQ的选择器，因为执行这个方法可以传递一个selector参数进去，通过selector我们可以获取到需要操作的DOM元素集合（JQ类数组集合）；传递的第二个参数context它是当前获取元素的上下文（不传递默认是document，如果传递，我们传递一个JS元素对象即可）</p>
+  
+  <p>但是把它叫做JQ选择器有点笼统，因为传递的selector支持三种格式： <br>
+  传递的是个字符串，就是我们所谓的选择器，能够通过选择器获取到元素 <br>
+  传递的是个元素对象，它的意思是把JS原生对象转换为JQ对象 <br>
+  传递的是个函数，它代表等DOM结构加载完成在执行对应的JS代码（类似于window.onload）</p>
+  
+  <p>…</p>
+</blockquote>
+
+<p><code>JQ的选择器</code></p>
+
+
+
+<pre class="prettyprint with-line-number hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment line-number">1.</span>$===jQuery  <span class="hljs-comment">//=&gt;true</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">2.</span>$()===jQuery() <span class="hljs-comment">//=&gt;false 不同实例</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">3.</span>$() <span class="hljs-keyword">instanceof</span> jQuery <span class="hljs-comment">//=&gt;true</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">4.</span><span class="hljs-keyword">var</span> $example=$(); <span class="hljs-comment">//=&gt;我们用JQ选择器获取的值，一般都是用以$开头的变量名来存储（以后看见变量名是以$开头的，我们就知道是JQ获取的实例[JQ对象]）</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">5.</span><span class="hljs-comment">/*
+</span></div><div class="hljs-line"><span class="hljs-comment line-number">6.</span> * $example
+</div><div class="hljs-line"><span class="hljs-comment line-number">7.</span> *   [xxx:xxx  私有的属性]
+</div><div class="hljs-line"><span class="hljs-comment line-number">8.</span> *   0:某一个元素对象
+</div><div class="hljs-line"><span class="hljs-comment line-number">9.</span> *   ...
+</div><div class="hljs-line"><span class="hljs-comment line-number">10.</span> *   length:类数组的长度
+</div><div class="hljs-line"><span class="hljs-comment line-number">11.</span> *   context:document
+</div><div class="hljs-line"><span class="hljs-comment line-number">12.</span> *   selector:''传递的选择器内容
+</div><div class="hljs-line"><span class="hljs-comment line-number">13.</span> *   
+</div><div class="hljs-line"><span class="hljs-comment line-number">14.</span> *   __protot__：jQuery.prototype
+</div><div class="hljs-line"><span class="hljs-comment line-number">15.</span> *       [xxx:xxx 公有的属性和方法]
+</div><div class="hljs-line"><span class="hljs-comment line-number">16.</span> *       add
+</div><div class="hljs-line"><span class="hljs-comment line-number">17.</span> *       addClass
+</div><div class="hljs-line"><span class="hljs-comment line-number">18.</span> *       ...  
+</div><div class="hljs-line"><span class="hljs-comment line-number">19.</span> *       
+</div><div class="hljs-line"><span class="hljs-comment line-number">20.</span> *      __proto__:Object.prototype  
+</div><div class="hljs-line"><span class="hljs-comment line-number">21.</span> */
+</div></code></pre>
+
+<blockquote>
+  <p>第一个参数[selector]传递的是一个字符串，就是通过选择器获取需要的元素集合（获取的结果怎么着都是类数组集合：获取多个元素也就是索引多点，获取一个元素也就是只有索引0，一个都没获取到就是一个空的类数组集合[而不是null]）</p>
+  
+  <p>一般CSS或者CSS3中支持的选择器，JQ都支持</p>
+</blockquote>
+
+
+
+<pre class="prettyprint with-line-number hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment line-number">1.</span><span class="hljs-comment">//=&gt;基本选择器</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">2.</span>$(<span class="hljs-string">'#xxx'</span>)  
+</div><div class="hljs-line"><span class="hljs-comment line-number">3.</span>$(<span class="hljs-string">'.xxx'</span>)  
+</div><div class="hljs-line"><span class="hljs-comment line-number">4.</span>$(<span class="hljs-string">'xxx'</span>)  
+</div><div class="hljs-line"><span class="hljs-comment line-number">5.</span>$(<span class="hljs-string">'*'</span>)  
+</div><div class="hljs-line"><span class="hljs-comment line-number">6.</span>$(<span class="hljs-string">'.xxx,#xxx'</span>)
+</div><div class="hljs-line"><span class="hljs-comment line-number">7.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">8.</span><span class="hljs-comment">//=&gt;后代选择器</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">9.</span>$(<span class="hljs-string">'.box a'</span>)
+</div><div class="hljs-line"><span class="hljs-comment line-number">10.</span>$(<span class="hljs-string">'.box&gt;a'</span>)
+</div><div class="hljs-line"><span class="hljs-comment line-number">11.</span><span class="hljs-comment">//$('.box~a')</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">12.</span><span class="hljs-comment">//$('.box+a') 不常用</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">13.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">14.</span><span class="hljs-comment">//=&gt;伪类选择器</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">15.</span>$(<span class="hljs-string">'.box:contains(xxx)'</span>) 包含某某某内容的
+</div><div class="hljs-line"><span class="hljs-comment line-number">16.</span>$(<span class="hljs-string">'a:first'</span>)
+</div><div class="hljs-line"><span class="hljs-comment line-number">17.</span>$(<span class="hljs-string">'a:last'</span>)
+</div><div class="hljs-line"><span class="hljs-comment line-number">18.</span>$(<span class="hljs-string">'a:eq(1)'</span>) 索引为<span class="hljs-number">1</span>的
+</div><div class="hljs-line"><span class="hljs-comment line-number">19.</span>$(<span class="hljs-string">'a:gt(1)'</span>) 索引大于<span class="hljs-number">1</span>的
+</div><div class="hljs-line"><span class="hljs-comment line-number">20.</span>$(<span class="hljs-string">'a:lt(10)'</span>) 索引小于<span class="hljs-number">10</span>的
+</div><div class="hljs-line"><span class="hljs-comment line-number">21.</span>$(<span class="hljs-string">'a:not()'</span>) 不包含什么的
+</div><div class="hljs-line"><span class="hljs-comment line-number">22.</span>$(<span class="hljs-string">'a:not(:gt(5))'</span>) 获取所有的a，但是不包含索引大于<span class="hljs-number">5</span>的（前六个）
+</div><div class="hljs-line"><span class="hljs-comment line-number">23.</span>...
+</div><div class="hljs-line"><span class="hljs-comment line-number">24.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">25.</span><span class="hljs-comment">//=&gt;属性选择器</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">26.</span>...
+</div></code></pre>
+
+<p><code>JQ对象和原生JS对象转换</code></p>
+
+<blockquote>
+  <p>JQ对象：通过$()获取的JQ实例(类数组) <br>
+  原生JS对象：通过ES中提供的属性或者方法获取的JS元素对象(nodeType===1)</p>
+  
+  <p>把JQ对象转换为原生JS对象</p>
+</blockquote>
+
+
+
+<pre class="prettyprint with-line-number hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment line-number">1.</span><span class="hljs-keyword">var</span> oBox=<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'box'</span>);<span class="hljs-comment">//=&gt;原生JS对象</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">2.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">3.</span><span class="hljs-comment">//oBox.addClass();//=&gt;报错：oBox不是JQ对象，不能使用JQ原型上的方法</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">4.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">5.</span><span class="hljs-keyword">var</span> $box=$(oBox); <span class="hljs-comment">//=&gt;把原生JS对象转换为JQ对象</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">6.</span>$box.addClass(<span class="hljs-string">'bg'</span>);
+</div></code></pre>
+
+<blockquote>
+  <p>把JQ对象转换为原生JS对象</p>
+</blockquote>
+
+
+
+<pre class="prettyprint with-line-number hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment line-number">1.</span><span class="hljs-keyword">var</span> $body=$(<span class="hljs-string">'body'</span>);
+</div><div class="hljs-line"><span class="hljs-comment line-number">2.</span><span class="hljs-comment">//$body.className //=&gt;undefined，因为className是JS原生内置的属性，JQ对象不能直接的用</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">3.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">4.</span><span class="hljs-comment">//$body[索引]：在集合中获取指定索引的内容（获取的内容就是原生JS对象）</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">5.</span><span class="hljs-comment">//$body.get(索引)：等价于 $body[索引]，获取指定索引位置的元素（原生JS对象）</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">6.</span><span class="hljs-comment">//$body.eq(索引)：获取指定索引位置的元素对象（获取的结果还是一个新的JQ对象）</span>
+</div></code></pre>
+
+<p><code>selector是一个方法</code></p>
+
+
+
+<pre class="prettyprint with-line-number hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment line-number">1.</span>$(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+</div><div class="hljs-line"><span class="hljs-comment line-number">2.</span>    <span class="hljs-comment">//=&gt;当页面中的DOM结构加载完成，就会执行回调函数中的JS代码</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">3.</span>    <span class="hljs-comment">//=&gt;类似于window.onload：等到页面中的DOM结构以及资源文件都加载完成才会执行对应的JS代码</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">4.</span>});
+</div><div class="hljs-line"><span class="hljs-comment line-number">5.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">6.</span>$(<span class="hljs-built_in">document</span>).ready(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+</div><div class="hljs-line"><span class="hljs-comment line-number">7.</span>    <span class="hljs-comment">//=&gt;这种写法和上面的写法一模一样</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">8.</span>});
+</div></code></pre>
+
+<blockquote>
+  <p>和window.onload不太一样 <br>
+  1、$(function(){}) 可一在同一个页面中使用多次，多次都生效（所以在使用JQ完成代码的时候，我们一般都会把代码放在回调函数中：首先不仅是等到结构加载完在执行，而且还形成了一个闭包） <br>
+  原理：利用了DOM二级事件绑定(可以执行多次)，监听的是DOMContentLoaded事件(DOM结构加载完成就会触发执行)</p>
+  
+  <p>2、window.onload本身就是资源都加载完成才会执行，使用的是DOM零级事件绑定，在同一个页面中只能使用一次 <br>
+  window.onload=function()… <br>
+  window.onload=function()… <br>
+  只能留最后一个，最后一次赋值替换了原有赋值</p>
+</blockquote>
+
+<h3 id="jq即是一个类也是一个对象">JQ即是一个类也是一个对象</h3>
+
+<blockquote>
+  <p>jQuery.prototype上设置了很多的属性和方法，这些是供JQ实例（DOM集合或者DOM元素）使用的属性和方法 <br>
+  addClass <br>
+  css <br>
+  removeClass <br>
+  attr <br>
+  …</p>
+  
+  <p>jQuery也是一个普通的对象，在对象上也有一些自己的属性和方法（和实例没有任何的关系）,这些都是工具类的方法 <br>
+  ajax <br>
+  isFunction <br>
+  unique <br>
+  …</p>
+</blockquote>
+
+<p><code>jQuery.prototype</code></p>
+
+
+
+<pre class="prettyprint with-line-number hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment line-number">1.</span>$(<span class="hljs-string">'#box'</span>).index()：获取当前元素的索引（是在自己兄弟元素中的索引，它有几个哥哥，索引就是几）
+</div><div class="hljs-line"><span class="hljs-comment line-number">2.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">3.</span>$(<span class="hljs-string">'body'</span>).data(key,value)
+</div><div class="hljs-line"><span class="hljs-comment line-number">4.</span>只传递key是获取
+</div><div class="hljs-line"><span class="hljs-comment line-number">5.</span>如果传递了value是设置
+</div><div class="hljs-line"><span class="hljs-comment line-number">6.</span>我们通过这个方法可以获取到在HTML结构上设置的data-xxx的自定义属性值
+</div><div class="hljs-line"><span class="hljs-comment line-number">7.</span><span class="hljs-comment">//&lt;body data-index='12'&gt;&lt;/body&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">8.</span><span class="hljs-comment">//$('body').data('index') =&gt;12</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">9.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">10.</span>$(<span class="hljs-string">'#box'</span>).attr()：设置或者批量设置或者获取当前元素的自定义属性(内置属性也可以)  removeAttr
+</div><div class="hljs-line"><span class="hljs-comment line-number">11.</span>$(<span class="hljs-string">'#box'</span>).prop()：和attr一样也是操作元素属性的，但是prop一般都操作表单元素的内置或者自定义属性 removeProp
+</div><div class="hljs-line"><span class="hljs-comment line-number">12.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">13.</span>addClass：增加样式类
+</div><div class="hljs-line"><span class="hljs-comment line-number">14.</span>removeClass：移除样式类
+</div><div class="hljs-line"><span class="hljs-comment line-number">15.</span>toggleClass：当前样式类有就是移除，没有就是增加
+</div><div class="hljs-line"><span class="hljs-comment line-number">16.</span>hasClass：验证是否存在某个样式类名
+</div><div class="hljs-line"><span class="hljs-comment line-number">17.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">18.</span>$(<span class="hljs-string">'#box'</span>).html([val])：不传val就是获取内容，传递val就是设置内容，等价于原生的innerHTML
+</div><div class="hljs-line"><span class="hljs-comment line-number">19.</span>$(<span class="hljs-string">'input'</span>).val([val])：表单元素value值的操作(设置或者获取)
+</div><div class="hljs-line"><span class="hljs-comment line-number">20.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">21.</span>css：设置或者批量设置或者获取元素的样式（获取的结果没有去单位）
+</div><div class="hljs-line"><span class="hljs-comment line-number">22.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">23.</span>offset()：获取距离BODY的偏移
+</div><div class="hljs-line"><span class="hljs-comment line-number">24.</span>position()：获取距离父级参照物的偏移
+</div><div class="hljs-line"><span class="hljs-comment line-number">25.</span>scrollTop/scrollLeft([val])：获取或者设置当前元素卷去的高度或者宽度
+</div><div class="hljs-line"><span class="hljs-comment line-number">26.</span>height/width([val])
+</div><div class="hljs-line"><span class="hljs-comment line-number">27.</span>innerWidth/innerHeight()：等价于clientWidth/clientHeight
+</div><div class="hljs-line"><span class="hljs-comment line-number">28.</span>outerWidth/outerHeight()：等价于offsetWidth/offsetHeight
+</div><div class="hljs-line"><span class="hljs-comment line-number">29.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">30.</span>$(<span class="hljs-string">'#box'</span>).on(<span class="hljs-string">'click'</span>,<span class="hljs-function"><span class="hljs-keyword">function</span>...)：<span class="hljs-title">JQ</span>中的事件绑定
+</span></div><div class="hljs-line"><span class="hljs-comment line-number">31.</span>...
+</div><div class="hljs-line"><span class="hljs-comment line-number">32.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">33.</span><span class="hljs-title">$</span>(<span class="hljs-params"><span class="hljs-string">'#box'</span></span>).<span class="hljs-title">remove</span>(<span class="hljs-params"></span>)：把当前盒子在容器中移除
+</div><div class="hljs-line"><span class="hljs-comment line-number">34.</span><span class="hljs-title">$</span>(<span class="hljs-params"><span class="hljs-string">'#box'</span></span>).<span class="hljs-title">clone</span>(<span class="hljs-params">true</span>)：把当前盒子深度克隆一份
+</div><div class="hljs-line"><span class="hljs-comment line-number">35.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">36.</span><span class="hljs-title">filter</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">37.</span><span class="hljs-title">children</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">38.</span><span class="hljs-title">find</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">39.</span>...
+</div></code></pre>
+
+<p><code>写在对象上的方法</code></p>
+
+<pre class="prettyprint with-line-number hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment line-number">1.</span><span class="hljs-keyword">var</span> j=$.noConflict()：如果当前项目中引入了两个类库，都是使用$操作的，为了防止$使用权的冲突，JQ做了一个处理，可以让我们转让$的使用权；此处返回的值j就是代表原始$的变量，以后可以使用j()执行（使用jQuery()执行也可以）
+</div><div class="hljs-line"><span class="hljs-comment line-number">2.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">3.</span><span class="hljs-keyword">var</span> j=$.noConflict(<span class="hljs-literal">true</span>)：深度转让，把jQuery和$的使用权都转让了，此时只能使用j()执行了
+</div><div class="hljs-line"><span class="hljs-comment line-number">4.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">5.</span>$.ajax()：帮助我们发送ajax请求
+</div><div class="hljs-line"><span class="hljs-comment line-number">6.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">7.</span>...
+</div></code></pre>
+
+<p><code>筛选方法</code></p>
+
+<blockquote>
+  <p>filter：同级过滤 <br>
+  children：子集过滤 <br>
+  find：后代过滤</p>
+</blockquote>
+
+
+
+<pre class="prettyprint with-line-number hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment line-number">1.</span><span class="hljs-keyword">var</span> $links=$(<span class="hljs-string">'a'</span>);
+</div><div class="hljs-line"><span class="hljs-comment line-number">2.</span>$links.filter(<span class="hljs-string">'.bg'</span>); <span class="hljs-comment">//=&gt;首先获取所有的A，在所有的A中把具备样式类为bg的获取到（二次筛选）</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">3.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">4.</span>$(<span class="hljs-string">'#box'</span>).children(<span class="hljs-string">'a'</span>); <span class="hljs-comment">//=&gt;首先获取#box所有的子元素，在所有子元素中筛选出标签名为a的元素集合 &lt;=&gt; $('#box&gt;a')</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">5.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">6.</span>$(<span class="hljs-string">'#box'</span>).find(<span class="hljs-string">'.bg'</span>); <span class="hljs-comment">//=&gt;首先获取#box后代中所有的元素，在所有的元素中筛选出样式类名中具备bg的元素集合 &lt;=&gt; $('#box .bg')</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">7.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">8.</span><span class="hljs-comment">//prev：获取上一个哥哥  $('#box').prev('a')</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">9.</span><span class="hljs-comment">//prevAll：所有的哥哥</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">10.</span><span class="hljs-comment">//next：下一个弟弟</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">11.</span><span class="hljs-comment">//nextAll：所有的弟弟</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">12.</span><span class="hljs-comment">//siblings：所有的兄弟</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">13.</span><span class="hljs-comment">//parent：父亲元素</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">14.</span><span class="hljs-comment">//parents：所有的祖先元素（一直到html为止）</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">15.</span>...
+</div></code></pre>
+
+<p><code>each</code></p>
+
+<blockquote>
+  <p>JQ中的each有三种 <br>
+  1、写在原型上的each：遍历JQ对象中的每一项 <br>
+  2、写在对象上的each：工具方法，可以用来遍历数组、类数组、对象等 <br>
+  3、内置的each其实也是调用原型上的each处理的，只不过JQ在处理的时候会内部自己调用</p>
+</blockquote>
+
+
+
+<pre class="prettyprint with-line-number hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment line-number">1.</span><span class="hljs-comment">//=&gt;内置EACH</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">2.</span>$(<span class="hljs-string">'a'</span>).addClass(<span class="hljs-string">'select'</span>); <span class="hljs-comment">//=&gt;我们获取的A可能有很多个，执行一次addClass，相当于给每个获取的A都增加了一个叫做select的样式类（JQ中大部分方法在执行的时候，都会把获取的JQ集合中的每一项调用each进行遍历，把需要操作的任务对每一个遍历的元素进行操作）</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">3.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">4.</span>$(<span class="hljs-string">'a'</span>).css(<span class="hljs-string">'width'</span>); <span class="hljs-comment">//=&gt;获取的时候只返回第一个元素的样式（设置走内置EACH批量处理，获取只处理第一个）</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">5.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">6.</span><span class="hljs-comment">//=&gt;原型上的EACH</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">7.</span>$(<span class="hljs-string">'a'</span>).each(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">index,item</span>)</span>{
+</div><div class="hljs-line"><span class="hljs-comment line-number">8.</span>    <span class="hljs-comment">//=&gt;传递参数的顺序和数组内置的forEach顺序相反：ary.forEach(function(item,index){...});</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">9.</span>    <span class="hljs-comment">//=&gt;获取的A有多少个，回调函数被触发执行多少次：index当前遍历这一项的索引 item是当前遍历这一项的内容</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">10.</span>    <span class="hljs-comment">//=&gt;this -&gt; item (原生JS对象) 方法中的this是当前遍历的这一项</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">11.</span>    <span class="hljs-comment">//=&gt;$(this) 也是当前遍历这一项，但是属于JQ对象</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">12.</span>});
+</div><div class="hljs-line"><span class="hljs-comment line-number">13.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">14.</span><span class="hljs-comment">//=&gt;JQ对象上提供的工具方法：each</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">15.</span>$.each([数组/类数组], <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">index,item</span>) </span>{
+</div><div class="hljs-line"><span class="hljs-comment line-number">16.</span>    <span class="hljs-comment">//=&gt;this:item</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">17.</span>});
+</div><div class="hljs-line"><span class="hljs-comment line-number">18.</span>$.each([对象],<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">key,value</span>)</span>{
+</div><div class="hljs-line"><span class="hljs-comment line-number">19.</span>    <span class="hljs-comment">//=&gt;this:value</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">20.</span>    <span class="hljs-comment">//=&gt;JQ也是采用for in循环用来遍历对象的，这样的话就存在可能把公有属性和方法遍历到的问题</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">21.</span>    <span class="hljs-keyword">if</span>([对象].hasOwnProperty(key)){
+</div><div class="hljs-line"><span class="hljs-comment line-number">22.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">23.</span>    }
+</div><div class="hljs-line"><span class="hljs-comment line-number">24.</span>});
+</div></code></pre>
+
+<p><code>extend</code></p>
+
+<blockquote>
+  <p><span>$</span>.extend()：把方法扩展到JQ对象上，这个操作一般是用来完善类库的 <br>
+  $.fn.extend()：把方法扩展到JQ的原型上，供JQ的实例（DOM集合）使用，这个操作一般是用来写JQ插件的</p>
+</blockquote>
+
+
+
+<pre class="prettyprint with-line-number hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment line-number">1.</span><span class="hljs-comment">//=&gt;扩展工具方法，用来完善类库</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">2.</span>$.extend({
+</div><div class="hljs-line"><span class="hljs-comment line-number">3.</span>    <span class="hljs-attr">aa</span>:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{}
+</div><div class="hljs-line"><span class="hljs-comment line-number">4.</span>});
+</div><div class="hljs-line"><span class="hljs-comment line-number">5.</span>$.aa();
+</div><div class="hljs-line"><span class="hljs-comment line-number">6.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">7.</span><span class="hljs-comment">//=&gt;扩展到原型上供实例调用的</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">8.</span>$.fn.extend({
+</div><div class="hljs-line"><span class="hljs-comment line-number">9.</span>    <span class="hljs-attr">bb</span>:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+</div><div class="hljs-line"><span class="hljs-comment line-number">10.</span>        <span class="hljs-comment">//=&gt;this:操作当前这个方法的JQ实例（JQ对像），此处不需要再$(this)转换为JQ对像</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">11.</span>    }
+</div><div class="hljs-line"><span class="hljs-comment line-number">12.</span>});
+</div><div class="hljs-line"><span class="hljs-comment line-number">13.</span>$(<span class="hljs-string">'xxx'</span>).bb();
+</div></code></pre>
+
+<p><code>animate</code></p>
+
+<blockquote>
+  <p>JQ中提供了元素运动的动画库 <br>
+  stop：结束当前元素正在运行的动画，继续执行下一个新动画（一般我们实现动画,stop方法基本上必然执行） <br>
+  finish：和stop类似，finish需要让元素立即运动到上一个动画的目标位置，从目标位置执行下一个动画，而stop是从上一个动画停止的位置执行下一个动画</p>
+  
+  <p>animate([target],[duration],[effect],[callBack])： <br>
+  [target] 对象 <br>
+  [duration] MS <br>
+  [effect]  linear、ease、ease-in、ease-out、ease-in-out <br>
+  [callBack] 回调函数，动画结束做的事情</p>
+  
+  <p>show(1000/’fast’/’slow’) <br>
+  hide <br>
+  toggle</p>
+  
+  <p>fadeIn <br>
+  fadeOut <br>
+  fadeToggle</p>
+  
+  <p>slideUp <br>
+  slideDown <br>
+  slideToggle <br>
+  …</p>
+</blockquote></div></body></html>
