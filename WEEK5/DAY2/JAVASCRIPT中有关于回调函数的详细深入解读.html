@@ -1,0 +1,198 @@
+<!DOCTYPE html><html><head><title>JAVASCRIPT中有关于回调函数的详细深入解读</title><meta charset='utf-8'><link href='https://dn-maxiang.qbox.me/res-min/themes/marxico.css' rel='stylesheet'><style>
+.note-content  {font-family: 'Helvetica Neue', Arial, 'Hiragino Sans GB', STHeiti, 'Microsoft YaHei', 'WenQuanYi Micro Hei', SimSun, Song, sans-serif;}
+
+</style></head><body><div id='preview-contents' class='note-content'>
+                        
+                    
+
+<h2 id="javascript中有关于回调函数的详细深入解读">JAVASCRIPT中有关于回调函数的详细深入解读</h2>
+
+<p></p>
+
+<h3 id="什么是回调函数">什么是回调函数？</h3>
+
+<blockquote>
+  <p>把一个函数当做实参值传递给函数的形参变量(或者传递给函数，通过arguments获取)，在另外一个函数中把传递的函数执行，这种机制就是回调函数机制</p>
+  
+  <p>凡是在某一个函数的某一个阶段需要完成某一件事情（而这件事情是不确定的），都可以利用回调函数机制，把需要处理的事情当做值传递进来</p>
+</blockquote>
+
+
+
+<pre class="prettyprint with-line-number hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment line-number">1.</span><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params">num,callBack</span>)</span>{
+</div><div class="hljs-line"><span class="hljs-comment line-number">2.</span>    <span class="hljs-comment">//=&gt;callBack：传递进来的回调函数</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">3.</span>    <span class="hljs-keyword">typeof</span> callBack===<span class="hljs-string">'function'</span>?callBack():<span class="hljs-literal">null</span>;
+</div><div class="hljs-line"><span class="hljs-comment line-number">4.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">5.</span>    callBack &amp;&amp; callBack();<span class="hljs-comment">//=&gt;这种方式默认就是，要不然不传递参数，传递的话参数值肯定是函数</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">6.</span>}
+</div><div class="hljs-line"><span class="hljs-comment line-number">7.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">8.</span>fn(<span class="hljs-number">10</span>);
+</div><div class="hljs-line"><span class="hljs-comment line-number">9.</span>fn(<span class="hljs-number">20</span>,<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+</div><div class="hljs-line"><span class="hljs-comment line-number">10.</span>    <span class="hljs-comment">//=&gt;此处的匿名函数就是给callBack传递的值</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">11.</span>});
+</div></code></pre>
+
+<blockquote>
+  <p>既然我们已经把函数作为值传递给FN了，此时在FN中我们可以尽情的操作传递的函数 <br>
+  1、我们可以在FN中把回调函数执行 0~N 次 <br>
+  2、我们还可以给回调函数传递参数值 <br>
+  3、我们还可以把回调函数中的THIS进行修改 <br>
+  4、我们还可以接收回调函数执行返回的值 <br>
+  …</p>
+</blockquote>
+
+
+
+<pre class="prettyprint with-line-number hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment line-number">1.</span><span class="hljs-comment">//=&gt;需求:执行FN可以实现任意数求和,把求出的和传递给回调函数</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">2.</span><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params">callBack</span>) </span>{
+</div><div class="hljs-line"><span class="hljs-comment line-number">3.</span>    <span class="hljs-comment">//-&gt;把ARG中的除第一项以外的参数值获取到,并且转变为数组（并且给数求和）</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">4.</span>    <span class="hljs-keyword">var</span> argNumAry = <span class="hljs-built_in">Array</span>.prototype.slice.call(<span class="hljs-built_in">arguments</span>, <span class="hljs-number">1</span>),
+</div><div class="hljs-line"><span class="hljs-comment line-number">5.</span>        total = <span class="hljs-built_in">eval</span>(argNumAry.join(<span class="hljs-string">'+'</span>));
+</div><div class="hljs-line"><span class="hljs-comment line-number">6.</span>    <span class="hljs-comment">//-&gt;执行回调函数，把求出的和当做实参传递给回调函数，并且回调函数中的this指向    </span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">7.</span>    <span class="hljs-keyword">typeof</span> callBack === <span class="hljs-string">'function'</span> ? callBack.call(fn, total) : <span class="hljs-literal">null</span>;
+</div><div class="hljs-line"><span class="hljs-comment line-number">8.</span>}
+</div><div class="hljs-line"><span class="hljs-comment line-number">9.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">10.</span><span class="hljs-keyword">var</span> total=<span class="hljs-literal">null</span>;
+</div><div class="hljs-line"><span class="hljs-comment line-number">11.</span>fn(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">result</span>) </span>{
+</div><div class="hljs-line"><span class="hljs-comment line-number">12.</span>    <span class="hljs-built_in">console</span>.log(result, <span class="hljs-keyword">this</span>);<span class="hljs-comment">//=&gt;100 FN</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">13.</span>    total=result;
+</div><div class="hljs-line"><span class="hljs-comment line-number">14.</span>}, <span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">30</span>, <span class="hljs-number">40</span>);
+</div></code></pre>
+
+<blockquote>
+  <p>我们之前学习的知识点中，很多方法都是依托于回调函数来完成的</p>
+</blockquote>
+
+
+
+<pre class="prettyprint with-line-number hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment line-number">1.</span><span class="hljs-keyword">var</span> ary=[<span class="hljs-number">12</span>,<span class="hljs-number">23</span>,<span class="hljs-number">34</span>];
+</div><div class="hljs-line"><span class="hljs-comment line-number">2.</span>ary.sort(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">a,b</span>)</span>{
+</div><div class="hljs-line"><span class="hljs-comment line-number">3.</span>    <span class="hljs-comment">//-&gt;a:当前项</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">4.</span>    <span class="hljs-comment">//-&gt;b:后一项</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">5.</span>    <span class="hljs-keyword">return</span> a-b;<span class="hljs-comment">//-&gt;返回一个大于零的值,a和b的位置进行交换</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">6.</span>});
+</div><div class="hljs-line"><span class="hljs-comment line-number">7.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">8.</span>ary.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">item,index,input</span>)</span>{
+</div><div class="hljs-line"><span class="hljs-comment line-number">9.</span>    <span class="hljs-comment">//-&gt;item:当前遍历的这一项</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">10.</span>    <span class="hljs-comment">//-&gt;index:当前遍历这一项的索引</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">11.</span>    <span class="hljs-comment">//-&gt;input:原始遍历的数组</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">12.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">13.</span>    <span class="hljs-comment">//=&gt;FOR-EACH每当循环遍历到数组中的某一项，都会把传递的回调函数执行一次（不仅执行还把遍历的这一项的值传递给回调函数）</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">14.</span>});
+</div><div class="hljs-line"><span class="hljs-comment line-number">15.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">16.</span><span class="hljs-comment">//=&gt;MAP遍历数组中的每一项,原有数组不变,返回的结果是修改后的新数组（MAP相当于FOR-EACH来说，增加了对原有项的修改）</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">17.</span><span class="hljs-keyword">var</span> newAry = ary.map(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">item,index,input</span>) </span>{
+</div><div class="hljs-line"><span class="hljs-comment line-number">18.</span>    <span class="hljs-keyword">return</span> item*<span class="hljs-number">10</span>;<span class="hljs-comment">//=&gt;回调函数中返回的是啥，相当于把当前遍历这一项修改为啥（回调函数中不写RETURN，默认返回的是undefined）</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">19.</span>});
+</div><div class="hljs-line"><span class="hljs-comment line-number">20.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">21.</span><span class="hljs-keyword">var</span> str=<span class="hljs-string">'zhufeng2017peixun2018'</span>;
+</div><div class="hljs-line"><span class="hljs-comment line-number">22.</span>str=str.replace(<span class="hljs-regexp">/\d+/g</span>,<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+</div><div class="hljs-line"><span class="hljs-comment line-number">23.</span>    <span class="hljs-keyword">return</span> <span class="hljs-string">'@'</span>;
+</div><div class="hljs-line"><span class="hljs-comment line-number">24.</span>});
+</div><div class="hljs-line"><span class="hljs-comment line-number">25.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">26.</span>...
+</div></code></pre>
+
+
+
+<h3 id="回调函数中的this指向问题">回调函数中的this指向问题</h3>
+
+<blockquote>
+  <p>回调函数中的this一般都是window（或者在严格模式下是undefined），原因：</p>
+  
+  <p>我们一般在执行回调函数的时候，都是直接的把它执行了，没有特意指定执行主体或者使用call改变this，所以默认一般都是window</p>
+</blockquote>
+
+<p><code>有关定时器回调函数中this的处理</code></p>
+
+<pre class="prettyprint with-line-number hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment line-number">1.</span><span class="hljs-keyword">var</span> obj = {<span class="hljs-attr">name</span>: <span class="hljs-string">'珠峰培训'</span>, <span class="hljs-attr">fn</span>: fn};
+</div><div class="hljs-line"><span class="hljs-comment line-number">2.</span><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line"><span class="hljs-comment line-number">3.</span>    <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>);
+</div><div class="hljs-line"><span class="hljs-comment line-number">4.</span>}
+</div><div class="hljs-line"><span class="hljs-comment line-number">5.</span>setTimeout(fn, <span class="hljs-number">1000</span>);<span class="hljs-comment">//=&gt;非严格模式或者严格模式下FN中的THIS都是WINDOW</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">6.</span>setTimeout(fn.call(obj), <span class="hljs-number">1000</span>);<span class="hljs-comment">//=&gt;设置定时器的时候就把FN执行了,把FN的返回结果赋值给定时器(1S后执行的是UNDEFINED)</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">7.</span>setTimeout(obj.fn, <span class="hljs-number">1000</span>);<span class="hljs-comment">//=&gt;FN中的THIS还是WINDOW</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">8.</span>setTimeout(fn.bind(obj), <span class="hljs-number">1000</span>);<span class="hljs-comment">//=&gt;FN中的THIS都是OBJ</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">9.</span>setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line"><span class="hljs-comment line-number">10.</span>    <span class="hljs-comment">//=&gt;this:window</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">11.</span>    fn.call(obj);
+</div><div class="hljs-line"><span class="hljs-comment line-number">12.</span>}, <span class="hljs-number">1000</span>);<span class="hljs-comment">//=&gt;FN中的THIS都是OBJ</span>
+</div></code></pre>
+
+<p><code>数组中方法回调函数中this指向问题</code></p>
+
+
+
+<pre class="prettyprint with-line-number hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment line-number">1.</span><span class="hljs-keyword">var</span> obj = {<span class="hljs-attr">name</span>: <span class="hljs-string">'珠峰培训'</span>};
+</div><div class="hljs-line"><span class="hljs-comment line-number">2.</span><span class="hljs-keyword">var</span> ary = [<span class="hljs-number">12</span>, <span class="hljs-number">23</span>, <span class="hljs-number">34</span>, <span class="hljs-number">45</span>];
+</div><div class="hljs-line"><span class="hljs-comment line-number">3.</span>ary.sort(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line"><span class="hljs-comment line-number">4.</span>    <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>);<span class="hljs-comment">//=&gt;WINDOW(严格模式下是UNDEFINED)</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">5.</span>});
+</div><div class="hljs-line"><span class="hljs-comment line-number">6.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">7.</span>ary.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line"><span class="hljs-comment line-number">8.</span>    <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>);<span class="hljs-comment">//=&gt;WINDOW(严格模式下是UNDEFINED)</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">9.</span>});
+</div><div class="hljs-line"><span class="hljs-comment line-number">10.</span>ary.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line"><span class="hljs-comment line-number">11.</span>    <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>);<span class="hljs-comment">//=&gt;OBJ</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">12.</span>}, obj);<span class="hljs-comment">//=&gt;FOR-EACH 和 MAP 这两个内置方法,除了第一个参数是回调函数以外，第二个参数是改变回调函数中的THIS指向的 (SOME、FILTER、FIND、EVERY... 这些方法的第二个参数都是改变回调函数中THIS的)</span>
+</div></code></pre>
+
+<h3 id="关于each循环方法的封装">关于EACH循环方法的封装</h3>
+
+<blockquote>
+  <p>需求： <br>
+  兼容所有的浏览器 <br>
+  类似于JQ中的EACH方法，我们需要支持对数组、类数组、纯粹对象的遍历任务 <br>
+  在遍历的过程中，通过回调函数返回值，来结束当前正在遍历的操作（回调函数中返回FALSE，我们应该立即结束对数组的遍历操作）</p>
+  
+  <p>附加思考： <br>
+  需要支持对原有数组的修改（回调函数中的返回值，可以修改原来数组中的某一项值）</p>
+</blockquote>
+
+
+
+<pre class="prettyprint with-line-number hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment line-number">1.</span>~<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line"><span class="hljs-comment line-number">2.</span>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">each</span>(<span class="hljs-params">value, callBack, context</span>) </span>{
+</div><div class="hljs-line"><span class="hljs-comment line-number">3.</span>        context = context || <span class="hljs-built_in">window</span>;
+</div><div class="hljs-line"><span class="hljs-comment line-number">4.</span>        <span class="hljs-keyword">var</span> valueType = <span class="hljs-built_in">Object</span>.prototype.toString.call(value);
+</div><div class="hljs-line"><span class="hljs-comment line-number">5.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">6.</span>        <span class="hljs-comment">//-&gt;如果传递的VALUE是一个纯粹的对象,我们使用FOR IN遍历</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">7.</span>        <span class="hljs-keyword">if</span> (valueType === <span class="hljs-string">'[object Object]'</span>) {
+</div><div class="hljs-line"><span class="hljs-comment line-number">8.</span>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> key <span class="hljs-keyword">in</span> value) {
+</div><div class="hljs-line"><span class="hljs-comment line-number">9.</span>                <span class="hljs-keyword">if</span> (value.hasOwnProperty(key)) {
+</div><div class="hljs-line"><span class="hljs-comment line-number">10.</span>                    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> callBack === <span class="hljs-string">'function'</span>) {
+</div><div class="hljs-line"><span class="hljs-comment line-number">11.</span>                        <span class="hljs-keyword">var</span> result = callBack.call(context, value[key], key);
+</div><div class="hljs-line"><span class="hljs-comment line-number">12.</span>                        <span class="hljs-keyword">if</span> (result === <span class="hljs-literal">false</span>) {
+</div><div class="hljs-line"><span class="hljs-comment line-number">13.</span>                            <span class="hljs-keyword">break</span>;
+</div><div class="hljs-line"><span class="hljs-comment line-number">14.</span>                        }
+</div><div class="hljs-line"><span class="hljs-comment line-number">15.</span>                    }
+</div><div class="hljs-line"><span class="hljs-comment line-number">16.</span>                }
+</div><div class="hljs-line"><span class="hljs-comment line-number">17.</span>            }
+</div><div class="hljs-line"><span class="hljs-comment line-number">18.</span>            <span class="hljs-keyword">return</span>;
+</div><div class="hljs-line"><span class="hljs-comment line-number">19.</span>        }
+</div><div class="hljs-line"><span class="hljs-comment line-number">20.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">21.</span>        <span class="hljs-comment">//-&gt;如果当前传递的VALUE有LENGTH属性,并且属性值是纯数字,我们就可以使用FOR循环遍历了</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">22.</span>        <span class="hljs-keyword">if</span> ((<span class="hljs-string">'length'</span> <span class="hljs-keyword">in</span> value) &amp;&amp; !<span class="hljs-built_in">isNaN</span>(value.length)) {
+</div><div class="hljs-line"><span class="hljs-comment line-number">23.</span>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; value.length; i++) {
+</div><div class="hljs-line"><span class="hljs-comment line-number">24.</span>                <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> callBack === <span class="hljs-string">'function'</span>) {
+</div><div class="hljs-line"><span class="hljs-comment line-number">25.</span>                    result = callBack.call(context, value[i], i);
+</div><div class="hljs-line"><span class="hljs-comment line-number">26.</span>                    <span class="hljs-keyword">if</span> (result === <span class="hljs-literal">false</span>) {
+</div><div class="hljs-line"><span class="hljs-comment line-number">27.</span>                        <span class="hljs-keyword">break</span>;
+</div><div class="hljs-line"><span class="hljs-comment line-number">28.</span>                    }
+</div><div class="hljs-line"><span class="hljs-comment line-number">29.</span>                }
+</div><div class="hljs-line"><span class="hljs-comment line-number">30.</span>            }
+</div><div class="hljs-line"><span class="hljs-comment line-number">31.</span>            <span class="hljs-keyword">return</span>;
+</div><div class="hljs-line"><span class="hljs-comment line-number">32.</span>        }
+</div><div class="hljs-line"><span class="hljs-comment line-number">33.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">34.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">35.</span>        <span class="hljs-comment">//-&gt;传递的参数有错误的</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">36.</span>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">TypeError</span>(<span class="hljs-string">'The value of the parameter you pass is not legal!'</span>);
+</div><div class="hljs-line"><span class="hljs-comment line-number">37.</span>    }
+</div><div class="hljs-line"><span class="hljs-comment line-number">38.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">39.</span>    <span class="hljs-built_in">window</span>.$each = each;
+</div><div class="hljs-line"><span class="hljs-comment line-number">40.</span>}();
+</div><div class="hljs-line"><span class="hljs-comment line-number">41.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">42.</span>$each({<span class="hljs-attr">name</span>: <span class="hljs-string">'珠峰培训'</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">12</span>, <span class="hljs-number">0</span>: <span class="hljs-number">13</span>}, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">item, index</span>) </span>{
+</div><div class="hljs-line"><span class="hljs-comment line-number">43.</span>    <span class="hljs-built_in">console</span>.log(item, index);
+</div><div class="hljs-line"><span class="hljs-comment line-number">44.</span>});
+</div></code></pre></div></body></html>

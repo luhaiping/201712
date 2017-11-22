@@ -1,0 +1,94 @@
+@import "reset";
+
+.container {
+  @W: 1000px;
+  @H: 300px;
+
+  position: relative;
+  margin: 20px auto;
+  width: @W;
+  height: @H;
+  text-align: center;
+  overflow: hidden;
+  background: url("../img/default.gif") no-repeat center center #EEE;
+
+  .wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: unit(unit(@W,px)*10, px); //=>需要在JS中根据获取的数据动态设定宽度
+    height: @H;
+
+    .slide {
+      float: left;
+      width: @W;
+      height: @H;
+
+      a {
+        display: block;
+        width: @W;
+        height: @H;
+
+        img {
+          display: none;
+          width: @W;
+          height: @H;
+          opacity: 0;
+          filter: alpha(opacity=0);
+        }
+      }
+    }
+  }
+
+  .focusBox {
+    display: inline-block;
+    position: relative;
+    top: unit(unit(@H,px)-30, px);
+    z-index: 999;
+    padding: 4px;
+    background: #999;
+    background: rgba(0, 0, 0, .5);
+    border-radius: 20px;
+
+    li {
+      float: left;
+      margin: 0 4px;
+      width: 12px;
+      height: 12px;
+      background: #FFF;
+      border-radius: 50%;
+      cursor: pointer;
+
+      &.select {
+        background: #E01D20;
+      }
+    }
+  }
+
+  .arrow {
+    display: none;
+    position: absolute;
+    top: 50%;
+    margin-top: -22.5px;
+    width: 28px;
+    height: 45px;
+    background: url("../img/pre.png") no-repeat;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+
+    &.arrowLeft {
+      left: 0;
+    }
+
+    &.arrowRight {
+      right: 0;
+      background-position: -50px 0;
+    }
+
+    &:hover {
+      opacity: 1;
+      filter: alpha(opacity=100);
+    }
+  }
+
+}
