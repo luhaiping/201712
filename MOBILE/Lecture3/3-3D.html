@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <link rel="stylesheet" href="css/reset.min.css">
+    <style>
+        .box {
+            margin: 50px auto;
+            padding: 20px;
+            width: 200px;
+            height: 200px;
+            border: 1px solid #000;
+
+            /*实现3D变形效果需要给当前元素所在的舞台设置视距*/
+            perspective: 1000px;
+        }
+
+        .box img {
+            display: block;
+            width: 200px;
+            height: 200px;
+
+            transform-style: preserve-3d;
+            transform: rotateX(60deg) rotateY(60deg);
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <img src="img/zf_cube1.png" alt="">
+</div>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <link rel="stylesheet" href="css/reset.min.css">
+    <style>
+        .box {
+            margin: 20px auto;
+            width: 200px;
+            height: 200px;
+            background: url("img/zf_cube1.png") no-repeat;
+            background-size: 100% 100%;
+
+            /*transform: translateX(100px) translateY(200px) rotate(45deg) scale(1.5);*/
+            /*
+                rotate(30deg):默认就是沿着垂直于屏幕方向的Z轴旋转的
+                rotateX:沿着X轴旋转
+                rotateY:沿着Y轴旋转
+            */
+            transform-origin: left top 0;
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body>
+<div class="box"></div>
+
+
+</body>
+</html>

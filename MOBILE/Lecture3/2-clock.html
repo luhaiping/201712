@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <link rel="stylesheet" href="css/reset.min.css">
+    <style>
+        .clockBox {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -150px 0 0 -60px;
+            width: 120px;
+            height: 300px;
+            background: url("img/clock.png") no-repeat;
+            background-size: 100% 100%;
+        }
+
+        .clockBox {
+            transform-origin: center top 0;
+            transform: rotate(60deg);
+            animation: clockMove 1s linear infinite both;
+            /*
+             * animation-name：运动轨迹的名称(@keyframes设置运动轨迹)
+             * animation-duration：完成动画需要的总时间
+             * animation-timing-function：运动方式，默认值ease非匀速，linear匀速，ease-in，ease-out...
+             * animation-delay：延迟时间，默认是0s代表立即执行
+             * animation-iteration-count：动画执行的次数，默认是1代表执行一次就结束了，infinite是无限次运动
+             *
+             * animation-fill-mode：设置动画的状态
+             *    none默认值：无任何特殊状态设置
+             *    forwards：动画完成后会停留在最后一帧的位置（默认动画执行完成会回退到起始位置）
+             *    backwards：只有在动画有延迟时间的时候才有用，当动画在延迟时间内，让运动的元素在运动轨迹的第一帧位置等待
+             *    both：同时具备以上两个效果
+             */
+        }
+
+        @keyframes clockMove {
+            from, to {
+                transform: rotate(60deg);
+            }
+            50% {
+                transform: rotate(-60deg);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="clockBox"></div>
+</body>
+</html>

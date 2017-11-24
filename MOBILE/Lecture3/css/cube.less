@@ -1,0 +1,93 @@
+@import "reset";
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+.main {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -284px 0 0 -160px;
+  width: 320px;
+  height: 568px;
+  background: url("../img/zf_cubeBg.jpg") no-repeat;
+  background-size: cover; /*以背景图最适合的比例铺满整个屏幕：以后项目中凡是大容器或者整个页面的背景图大小最好都这样设置*/
+}
+
+.cubeBox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -(unit(255/2, px)) 0 0 -(unit(255/2, px));
+  width: 255px;
+  height: 255px;
+
+  li {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+/*--实现魔方--*/
+@v-1: unit(255/2, px);
+@v-2: unit(-255/2, px);
+
+.main {
+  perspective: 2000px;
+
+  .cubeBox {
+    transform-style: preserve-3d;
+
+    //=>为了可以看见效果,给魔方一个初始的旋转角度
+    transform: scale(.6) rotateX(-30deg) rotateY(45deg);
+
+    //=>自动360DEG旋转
+    animation: cubeMove 5s linear infinite both;
+
+    li {
+      //=>正反面
+      &:nth-child(1) {
+        transform: translateZ(@v-1);
+      }
+      &:nth-child(2) {
+        transform: translateZ(@v-2) rotateY(180deg);
+      }
+
+      //=>左右面
+      &:nth-child(3) {
+        transform: translateX(@v-2) rotateY(-90deg);
+      }
+      &:nth-child(4) {
+        transform: translateX(@v-1) rotateY(90deg);
+      }
+
+      //=>上下面
+      &:nth-child(5) {
+        transform: translateY(@v-2) rotateX(90deg);
+      }
+      &:nth-child(6) {
+        transform: translateY(@v-1) rotateX(-90deg);
+      }
+    }
+  }
+}
+
+@keyframes cubeMove {
+  0%, 100% {
+    transform: scale(.6) rotateX(-30deg) rotateY(45deg);
+  }
+  50% {
+    transform: scale(.6) rotateX(150deg) rotateY(-135deg);
+  }
+}
