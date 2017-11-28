@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <link rel="stylesheet" href="css/reset.min.css">
+    <style>
+        .main {
+            margin: 0 auto;
+            width: 1000px;
+            background: #EEE;
+        }
+
+        .main .menu {
+            float: left;
+            width: 150px;
+            border: 1px solid red;
+        }
+
+        .main .menu li a {
+            display: block;
+            height: 35px;
+            line-height: 35px;
+            border-bottom: 1px dashed green;
+            text-align: center;
+            color: green;
+        }
+
+        .detail {
+            display: none;
+            float: left;
+            width: 500px;
+            height: 362px;
+            line-height: 362px;
+            text-align: center;
+            font-size: 40px;
+            background: lightblue;
+        }
+    </style>
+</head>
+<body>
+<div class="main clearfix">
+    <ul class="menu">
+        <li><a href="#">
+            <span>手机</span>
+            <span>电话卡</span>
+        </a></li>
+        <li><a href="#">
+            <span>手机</span>
+            <span>电话卡</span>
+        </a></li>
+        <li><a href="#">
+            <span>手机</span>
+            <span>电话卡</span>
+        </a></li>
+        <li><a href="#">
+            <span>手机</span>
+            <span>电话卡</span>
+        </a></li>
+        <li><a href="#">
+            <span>手机</span>
+            <span>电话卡</span>
+        </a></li>
+        <li><a href="#">
+            <span>手机</span>
+            <span>电话卡</span>
+        </a></li>
+        <li><a href="#">
+            <span>手机</span>
+            <span>电话卡</span>
+        </a></li>
+        <li><a href="#">
+            <span>手机</span>
+            <span>电话卡</span>
+        </a></li>
+        <li><a href="#">
+            <span>手机</span>
+            <span>电话卡</span>
+        </a></li>
+        <li><a href="#">
+            <span>手机</span>
+            <span>电话卡</span>
+        </a></li>
+    </ul>
+
+    <div class="detail">
+
+    </div>
+</div>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script>
+    let $detail = $('.detail');
+    $detail.on('mouseover', function (e) {
+        //=>当前DETAIL以及DETAIL后代中的所有元素都不参与DOCUMENT的事件委托
+        e.stopPropagation();
+    });
+
+    $(document).on('mouseover', function (e) {
+        let target = e.target,
+                $target = $(target);
+
+        let $parents = $target.parents();
+        if ($parents.filter('.menu').length > 0) {
+            //=>MENU中的一个事件源：统一事件源(统一到LI上)
+            if (target.tagName === 'A') {
+                target = target.parentNode;
+            }
+            if (target.tagName === 'SPAN') {
+                target = target.parentNode.parentNode;
+            }
+
+            if (target.tagName === 'LI') {
+                $target = $(target);
+                $detail.css('display', 'block').html($target.index());
+                return;
+            }
+        }
+        $detail.css('display', 'none');
+    });
+</script>
+</body>
+</html>

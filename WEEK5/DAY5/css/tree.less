@@ -1,0 +1,46 @@
+@import "reset";
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+.menu {
+  padding: 0 10px;
+  width: 250px;
+  height: 100%;
+  background: lightgoldenrodyellow;
+  background: -webkit-linear-gradient(top left, lightblue, lightcyan, linen, lightgoldenrodyellow);
+  overflow: auto;
+
+  h3 {
+    position: relative;
+    padding-left: 20px;
+    line-height: 30px;
+    font-size: 14px;
+    font-weight: normal;
+
+    em {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      margin-top: -8px;
+      width: 16px;
+      height: 16px;
+      background: url("../img/icon.png") no-repeat;
+
+      &.plus {
+        background-position: -59px -28px;
+      }
+
+      &.minus {
+        background-position: -42px -29px;
+      }
+    }
+  }
+
+  .level2, .level3, .level4 {
+    display: none;
+    margin-left: 25px;
+  }
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <link rel="stylesheet" href="css/reset.min.css">
+    <style>
+        html, body {
+            font-size: 14px;
+        }
+
+        .shopBox {
+            position: relative;
+            display: block;
+            margin: 20px auto;
+            width: 100px;
+            height: 50px;
+            line-height: 50px;
+            border: 1px solid #AAA;
+            text-align: center;
+            color: #555;
+
+            /*border-bottom-color: #FFF;*/
+        }
+
+        .shopBox .detail {
+            display: none;
+            position: absolute;
+            top: 50px;
+            left: -401px;
+            z-index: -1;
+            width: 500px;
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+            border: 1px solid #AAA;
+        }
+
+        .shopBox:hover {
+            border-bottom-color: #FFF;
+        }
+
+        .shopBox:hover .detail {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<!--使用CSS实现:必须把详情区域当做购物车区域的子元素-->
+<a class="shopBox" href="#">
+    <span>购物车</span>
+    <div class="detail">
+        购物车中还没有商品赶紧选购吧
+    </div>
+</a>
+
+</body>
+</html>

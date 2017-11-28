@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <link rel="stylesheet" href="css/reset.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            background: lightcyan;
+        }
+
+        .box {
+            position: absolute;
+            top: 100px;
+            left: 200px;
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<div class="box" id="box"></div>
+
+<script src="js/jquery-1.11.3.min.js"></script>
+<script>
+    var $box = $('#box');
+    var minL = 0,
+            minT = 0,
+            maxL = (document.documentElement.clientWidth || document.body.clientWidth) - $box[0].offsetWidth,
+            maxT = (document.documentElement.clientHeight || document.body.clientHeight) - $box[0].offsetHeight;
+
+    $(document).on('keydown', function (e) {
+        //=>JQ中的事件绑定已经把E的兼容处理都完成了,我们只需要按照标准浏览器中的写法操作即可
+        var code = e.which,
+                curL = parseFloat($box.css('left')),
+                curT = parseFloat($box.css('top'));//=>JQ中CSS方法获取的结果是默认不去单位的(我们需要自己去除单位)
+        switch (code) {
+            case 37:
+                curL -= 10;
+                break;
+            case 39:
+                curL += 10;
+                break;
+            case 38:
+                curT -= 10;
+                break;
+            case 40:
+                curT += 10;
+                break;
+        }
+        //->在设置样式前，我们需要做一下边界判断
+        curL = curL < minL ? minL : (curL > maxL ? maxL : curL);
+        curT = curT < minT ? minT : (curT > maxT ? maxT : curT);
+        $box.css({
+            left: curL,
+            top: curT
+        });
+
+        //=>按下空格键，让元素蹦一下
+        if (code === 32) {
+            $box.stop().animate({top: curT - 60}, 500, function () {
+                $box.stop().animate({top: curT}, 500);
+            });
+        }
+    });
+</script>
+</body>
+</html>

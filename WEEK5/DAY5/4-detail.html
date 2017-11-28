@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <link rel="stylesheet" href="css/reset.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            font-size: 14px;
+        }
+
+        .shopBox {
+            position: relative;
+            margin: 20px auto;
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .shopBox h3 {
+            height: 100%;
+            text-align: center;
+            border: 1px solid #AAA;
+            cursor: pointer;
+        }
+
+        .shopBox .detail {
+            display: none;
+            position: absolute;
+            left: -402px;
+            top: 31px;
+            width: 500px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            border: 1px solid #AAA;
+        }
+    </style>
+</head>
+<body>
+<div class="shopBox">
+    <h3>购物车</h3>
+    <div class="detail">
+        购物车中还没有商品赶紧选购吧
+    </div>
+</div>
+
+<script src="js/jquery-1.11.3.min.js"></script>
+<script>
+    let $detail = $('.detail');
+    $('body').on('click', function (e) {
+        let target = e.target,
+                $target = $(target),
+                $parent = $target.parent();
+
+        //=>点击的是H3
+        if (target.tagName === 'H3' && $parent.hasClass('shopBox')) {
+            $detail.stop().toggle();//=>SHOW & HIDE
+            return;
+        }
+
+        //=>事件源是DETAIL，啥都不做
+        /*if ($target.hasClass('detail')) {
+         return;
+         }*/
+
+        //=>其余的情况下都是隐藏DETAIL
+        $detail.stop().hide();
+    });
+
+    $detail.on('click', function (e) {
+        e.stopPropagation();
+    });
+</script>
+</body>
+</html>

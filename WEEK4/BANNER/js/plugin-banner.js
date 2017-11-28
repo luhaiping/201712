@@ -80,7 +80,7 @@
                 </a>
             </li>`;
 
-                strFocus += `<li></li>`;
+                strFocus += `<li data-index="${i}"></li>`;
             }
             this.wrapper.innerHTML = str;
             this.isFocusShow ? this.focusBox.innerHTML = strFocus : null;
@@ -191,7 +191,35 @@
                 }
             });
         },
+        delegateEvent: function () {
+            var _this = this;
+            _this.container.onclick = function (e) {
+                e = e || window.event;
+                var target = e.target || e.srcElement,
+                    targetParent = target.parentNode;
 
+                //=>焦点事件源
+                if (/(^| +)focusBox( +|$)/i.test(targetParent.className)) {
+                    _this.initIndex = parseFloat(target.getAttribute('data-index'));
+                    _this.change();
+                    return;
+                }
+
+                //=>左右切换事件源
+                if (/(^| +)arrow( +|$)/i.test(target.className)) {
+                    if (target.className.indexOf('arrowRight') > -1) {
+                        _this.autoMove();
+                        return;
+                    }
+                    _this.initIndex--;
+                    if (_this.initIndex === -1) {
+                        _this.wrapper.style.left = -_this.bannerData.length * _this.containerWidth + 'px';
+                        _this.initIndex = _this.bannerData.length - 1;
+                    }
+                    _this.change();
+                }
+            };
+        },
         init: function (options) {
             //=>参数初始化
             this.initDefault(options);
@@ -220,8 +248,9 @@
 
             //=>其它方式切换
             this.mouseEvent();
-            this.arrowEvent();
-            this.eventFocus();
+            // this.arrowEvent();
+            // this.eventFocus();
+            this.delegateEvent();
         }
     };
 
