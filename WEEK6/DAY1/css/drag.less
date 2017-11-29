@@ -1,0 +1,40 @@
+@import "reset";
+
+html, body {
+  width: 100%;
+  height: 100%;
+  -webkit-user-select: none;
+}
+
+.mark {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 8;
+  background: #000;
+  opacity: .2;
+  filter: alpha(opacity=20);
+}
+
+.loginBox {
+  position: fixed;
+  z-index: 9;
+  width: 390px;
+  height: 400px;
+  background: #FFF;
+
+  h3 {
+    font-size: 16px;
+    font-weight: normal;
+    box-sizing: border-box;
+    border-bottom: 1px solid #eee;
+    height: 40px;
+    line-height: 40px;
+    cursor: move;
+    background: #fff;
+    text-align: center;
+    letter-spacing: 10px;
+  }
+}
