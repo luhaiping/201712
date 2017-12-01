@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <link rel="stylesheet" href="css/reset.min.css">
+    <style>
+        html, body {
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<script>
+    //    document.body.onclick = function fn() {
+    //        console.log(fn);//=>当前匿名函数的函数本身(给匿名函数设置名字只能在函数本身中使用)
+    //        console.log(1);
+    //    };
+    //    fn();//=>Uncaught ReferenceError: fn is not defined
+
+    //    document.addEventListener('click', function fn() {
+    //        console.log(1);
+    //    }, false);
+    //    document.addEventListener('click', function fn() {
+    //        console.log(2);
+    //    }, false);//=>点击输出结果是 1/2
+
+    //-------------------------------------
+    //    function fn() {
+    //        console.log(1);
+    //    }
+    //
+    //    document.addEventListener('click', fn, false);
+    //    document.addEventListener('click', fn, false);//=>第二次这个存储不到事件池中,因为事件池中已经存在FN了
+    //    document.onclick = fn;//=>本次绑定是没用的,被下面DOM0绑定给替换掉了
+    //    document.onclick = function () {
+    //        console.log(2);
+    //    };
+    //    document.addEventListener('click', function () {
+    //        console.log(3);
+    //    }, false);
+    //    //=>点击输出结果:1/2/3
+    //    //1、DOM0和DOM2绑定的方法是毫无关系的（因为是两套不同的处理机制），即使绑定的方法相同，也是执行两次
+    //    //2、谁先绑定的，就先执行谁
+
+    //--------------------
+    //    function fn1() {
+    //        console.log(1);
+    //    }
+    //    function fn2() {
+    //        console.log(2);
+    //    }
+    //    document.onclick = function () {
+    //        fn1();
+    //        fn2();
+    //    }
+
+    //-----------------------------
+    //=>事件是元素天生自带的行为  click、mouseover、DOMContentLoaded...
+    //=>DOM0：浏览器会把一些常用的事件挂载到元素对象的私有属性上，让我们可以实现DOM0事件绑定
+    //=>DOM2：凡是浏览器给元素天生设置的事件在DOM2中都可以用
+</script>
+
+<input type="button" id="test" value="点我啊">
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/1-5.js"></script>
+</body>
+</html>

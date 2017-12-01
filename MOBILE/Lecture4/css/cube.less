@@ -1,0 +1,86 @@
+@import "reset";
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+.main {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -284px 0 0 -160px;
+  width: 320px;
+  height: 568px;
+  background: url("../img/zf_cubeBg.jpg") no-repeat;
+  background-size: cover;
+}
+
+.cubeBox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -(unit(255/2, px)) 0 0 -(unit(255/2, px));
+  width: 255px;
+  height: 255px;
+
+  li {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+/*--实现魔方--*/
+@v-1: unit(255/2, px);
+@v-2: unit(-255/2, px);
+
+.main {
+  perspective: 2000px;
+
+  .cubeBox {
+    cursor: move;
+    transition: .3s; //=>控制魔方在手动旋转的时候,有一个动过过渡效果
+    transform-style: preserve-3d;
+    transform: scale(.6) rotateX(-30deg) rotateY(45deg);
+    //animation: cubeMove 5s linear infinite both;
+
+    li {
+      &:nth-child(1) {
+        transform: translateZ(@v-1);
+      }
+      &:nth-child(2) {
+        transform: translateZ(@v-2) rotateY(180deg);
+      }
+      &:nth-child(3) {
+        transform: translateX(@v-2) rotateY(-90deg);
+      }
+      &:nth-child(4) {
+        transform: translateX(@v-1) rotateY(90deg);
+      }
+      &:nth-child(5) {
+        transform: translateY(@v-2) rotateX(90deg);
+      }
+      &:nth-child(6) {
+        transform: translateY(@v-1) rotateX(-90deg);
+      }
+    }
+  }
+}
+
+@keyframes cubeMove {
+  0%, 100% {
+    transform: scale(.6) rotateX(-30deg) rotateY(45deg);
+  }
+  50% {
+    transform: scale(.6) rotateX(150deg) rotateY(-135deg);
+  }
+}
