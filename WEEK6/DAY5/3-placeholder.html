@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <link rel="stylesheet" href="css/reset.min.css">
+    <style>
+        .inputBox {
+            position: relative;
+            margin: 20px;
+            width: 200px;
+        }
+
+        .inputBox input, .inputBox .placeLike {
+            display: block;
+            padding: 0 10px;
+            width: 178px;
+            height: 30px;
+            line-height: 30px;
+            border: 1px solid green;
+        }
+
+        .inputBox .placeLike {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            color: #AAA;
+        }
+    </style>
+</head>
+<body>
+<div class="inputBox">
+    <input type="text" data-place="请输入用户名">
+</div>
+<div class="inputBox">
+    <input type="password" data-place="请输入密码">
+</div>
+<div class="inputBox">
+    <input type="email" data-place="请输入邮箱">
+</div>
+<script src="js/placeholder.js"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+<script src="js/animate.min.js"></script>
+<script>
+    let plan = [];
+
+    let fn1 = function () {
+        console.log(1);
+    };
+    plan.push(fn1);
+
+
+    let fn2 = function () {
+        console.log(2);
+    };
+    plan.push(fn2);
+
+
+    animate({
+        curEle: document.body,
+        target: {
+            opacity: 0.2
+        },
+        duration: 1000
+    });
+
+    //.....
+    let fn3 = function () {
+        console.log(3);
+    };
+    plan.push(fn3);
+
+
+</script>
+</body>
+</html>

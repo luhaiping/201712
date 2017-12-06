@@ -1,0 +1,11 @@
+<root>
+    <student>
+        <name>珠峰培训</name>
+        <age>9</age>
+    </student>
+
+    <student>
+        <name>周啸天</name>
+        <age>27</age>
+    </student>
+</root>

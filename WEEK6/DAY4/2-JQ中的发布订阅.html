@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+</head>
+<body>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script>
+    let $plan = $.Callbacks();
+    $plan.add(function () {
+        console.log(1);
+    });
+
+    setTimeout($plan.fire, 1000);
+
+
+    $plan.add(function () {
+        console.log(2);
+    });
+</script>
+</body>
+</html>

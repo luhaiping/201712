@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <link rel="stylesheet" href="css/reset.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+            margin: 20px auto;
+            width: 500px;
+            height: 500px;
+            border: 1px solid green;
+        }
+
+        .box {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: red;
+            cursor: move;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="box" id="box"></div>
+</div>
+
+
+<script src="js/drag.js"></script>
+<script>
+    let temp = Drag.init(box); //<=> new Drag(box)
+
+    temp.planDown.add(function (dragExp) {
+        dragExp.curEle.style.background = 'orange';
+    });
+
+    temp.planUp.add(function (dragExp) {
+        dragExp.curEle.style.background = 'red';
+    });
+
+
+    temp.planDown.add(function (dragExp) {
+        let curEle = dragExp.curEle;
+        clearInterval(curEle.dropTimer);
+    });
+    temp.planUp.add(function (dragExp) {
+        let curEle = dragExp.curEle;
+        let speed = 10,
+                flag = 0;
+        curEle.dropTimer = setInterval(function () {
+            if (flag > 1) {
+                clearInterval(curEle.dropTimer);
+                return;
+            }
+            speed += 10;
+            speed *= 0.98;
+            let curT = curEle.offsetTop + speed;
+            if (curT >= dragExp.maxT) {
+                curT = dragExp.maxT;
+                speed *= -1;
+                flag++;
+            } else {
+                flag = 0;
+            }
+            curEle.style.top = curT + 'px';
+        }, 17);
+    });
+</script>
+</body>
+</html>

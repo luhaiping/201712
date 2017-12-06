@@ -1,0 +1,410 @@
+<!DOCTYPE html><html><head><title>HTML5基础知识及项目实战</title><meta charset='utf-8'><link href='https://dn-maxiang.qbox.me/res-min/themes/marxico.css' rel='stylesheet'><style>
+.note-content  {font-family: 'Helvetica Neue', Arial, 'Hiragino Sans GB', STHeiti, 'Microsoft YaHei', 'WenQuanYi Micro Hei', SimSun, Song, sans-serif;}
+
+</style></head><body><div id='preview-contents' class='note-content'>
+                        
+                    
+
+<h2 id="html5基础知识及项目实战">HTML5基础知识及项目实战</h2>
+
+<p></p>
+
+<h3 id="html5基础概述">HTML5基础概述</h3>
+
+<blockquote>
+  <p>HTML：超文本标记语言（页面中不仅只有文字，而且可以呈现出图片、音视频等媒体资源）</p>
+  
+  <p>XHTML：它是HTML比较规范严谨的一代版本</p>
+  
+  <p>XML：可扩展的标记语言（HTML中使用的标签都是W3C标准中规定的，XML允许我们自己扩展标签的），它的作用不是用来写页面结构的，而是用来存储一些数据的（以自己扩展的标签作为标识，清晰明了的展示出数据的结构…）</p>
+  
+  <p>HTML5：当前HTML最新的一代版本，也是非常成功的一代版本，目前市场上基本上都是基于H5规范进行开发的（它相对于传统的HTML更多的是增加一些有助于开发的内容，对原有规范的修改调整很少）</p>
+</blockquote>
+
+<p><code>XML</code></p>
+
+
+
+<pre class="prettyprint with-line-number hljs-dark"><code class="language-xml hljs"><div class="hljs-line"><span class="hljs-comment line-number">1.</span><span class="hljs-tag">&lt;<span class="hljs-name">root</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">2.</span>    <span class="hljs-tag">&lt;<span class="hljs-name">student</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">3.</span>        <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>珠峰培训<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">4.</span>        <span class="hljs-tag">&lt;<span class="hljs-name">age</span>&gt;</span>9<span class="hljs-tag">&lt;/<span class="hljs-name">age</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">5.</span>    <span class="hljs-tag">&lt;/<span class="hljs-name">student</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">6.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">7.</span>    <span class="hljs-tag">&lt;<span class="hljs-name">student</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">8.</span>        <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>周啸天<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">9.</span>        <span class="hljs-tag">&lt;<span class="hljs-name">age</span>&gt;</span>27<span class="hljs-tag">&lt;/<span class="hljs-name">age</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">10.</span>    <span class="hljs-tag">&lt;/<span class="hljs-name">student</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">11.</span><span class="hljs-tag">&lt;/<span class="hljs-name">root</span>&gt;</span>
+</div></code></pre>
+
+<p><code>XHTML</code></p>
+
+<blockquote>
+  <p>文档声明比较复杂，需要特殊强调当前的页面需要严谨一些</p>
+</blockquote>
+
+<pre class="prettyprint with-line-number hljs-dark"><code class="hljs xml"><div class="hljs-line"><span class="hljs-comment line-number">1.</span><span class="php"><span class="hljs-meta">&lt;?</span>xml version=<span class="hljs-string">"1.0"</span> encoding=<span class="hljs-string">"UTF-8"</span><span class="hljs-meta">?&gt;</span></span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">2.</span><span class="hljs-meta">&lt;!DOCTYPE html
+</span></div><div class="hljs-line"><span class="hljs-comment line-number">3.</span>        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+</div><div class="hljs-line"><span class="hljs-comment line-number">4.</span>        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+</div><div class="hljs-line"><span class="hljs-comment line-number">5.</span><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://www.w3.org/1999/xhtml"</span> <span class="hljs-attr">xml:lang</span>=<span class="hljs-string">"en"</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">6.</span><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">7.</span>    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Title<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">8.</span><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">9.</span><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">10.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">11.</span><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">12.</span><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</div></code></pre>
+
+<p><code>HTML</code></p>
+
+
+
+<pre class="prettyprint with-line-number hljs-dark"><code class="hljs xml"><div class="hljs-line"><span class="hljs-comment line-number">1.</span><span class="hljs-meta">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+</span></div><div class="hljs-line"><span class="hljs-comment line-number">2.</span>"http://www.w3.org/TR/html4/loose.dtd"&gt;
+</div><div class="hljs-line"><span class="hljs-comment line-number">3.</span><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">4.</span><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">5.</span>    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Title<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">6.</span><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">7.</span><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">8.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">9.</span><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">10.</span><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</div></code></pre>
+
+<p><code>HTML5</code></p>
+
+
+
+<pre class="prettyprint with-line-number hljs-dark"><code class="hljs xml"><div class="hljs-line"><span class="hljs-comment line-number">1.</span><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">2.</span><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">'en'</span>&gt;</span><span class="hljs-comment">&lt;!--声明页面的语言模式：english，如果页面中出现了英文单词，浏览器会自主发起是否翻译的功能--&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">3.</span>    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">4.</span>        <span class="hljs-comment">&lt;!--指定当前页面的编码格式是国际统一编码格式：UTF-8  GB2312中国编码...--&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">5.</span>        <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">'UTF-8'</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">6.</span>    <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">7.</span>    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">8.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">9.</span>    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">10.</span><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</div></code></pre>
+
+<h3 id="html5提供的新语法规范">HTML5提供的新语法规范</h3>
+
+<p><strong><code>对原有语义化标签的升级</code></strong></p>
+
+<blockquote>
+  <p>语义化标签（标签语义化）：每一个HTML标签都有自己特殊的含义，我们在搭建页面结构的时候，应该让合理的标签做合适的事情</p>
+  
+  <p>HTML5中新增加一些语义化标签：</p>
+</blockquote>
+
+
+
+<pre class="prettyprint with-line-number hljs-dark"><code class="hljs excel"><div class="hljs-line"><span class="hljs-comment line-number">1.</span>article：文章区域
+</div><div class="hljs-line"><span class="hljs-comment line-number">2.</span>header：头部区域
+</div><div class="hljs-line"><span class="hljs-comment line-number">3.</span>footer：尾部区域
+</div><div class="hljs-line"><span class="hljs-comment line-number">4.</span>main：主体内容区域
+</div><div class="hljs-line"><span class="hljs-comment line-number">5.</span>section：普通区域，用来做区域划分
+</div><div class="hljs-line"><span class="hljs-comment line-number">6.</span>figure：配图区域
+</div><div class="hljs-line"><span class="hljs-comment line-number">7.</span>figcaption：配图说明区域
+</div><div class="hljs-line"><span class="hljs-comment line-number">8.</span>aside：与主体内容无关的区域（一般用来打广告）
+</div><div class="hljs-line"><span class="hljs-comment line-number">9.</span>nav：导航区域
+</div><div class="hljs-line"><span class="hljs-comment line-number">10.</span>...
+</div><div class="hljs-line"><span class="hljs-comment line-number">11.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">12.</span>=&gt;这些语义化标签在兼容它的浏览器中都是块级标签
+</div></code></pre>
+
+<blockquote>
+  <p>H5中新增加一些标记标签</p>
+</blockquote>
+
+<pre class="prettyprint with-line-number hljs-dark"><code class="hljs applescript"><div class="hljs-line"><span class="hljs-comment line-number">1.</span>mark：用来标记需要高量显示的文本
+</div><div class="hljs-line"><span class="hljs-comment line-number">2.</span><span class="hljs-built_in">time</span>：用来标记日期文本
+</div><div class="hljs-line"><span class="hljs-comment line-number">3.</span>...
+</div></code></pre>
+
+<blockquote>
+  <p>H5中对于原有的标签还有一些调整</p>
+</blockquote>
+
+
+
+<pre class="prettyprint with-line-number hljs-dark"><code class="hljs verilog"><div class="hljs-line"><span class="hljs-comment line-number">1.</span><span class="hljs-keyword">strong</span>：之前是加粗，现在是重点朗读（效果还是加粗，但是语义不一样了）
+</div><div class="hljs-line"><span class="hljs-comment line-number">2.</span><span class="hljs-keyword">small</span>：之前是变小，现在是附属细则（效果还是变小）
+</div><div class="hljs-line"><span class="hljs-comment line-number">3.</span>hr：之前是一条直线，现在是分割线，用来分隔两个区域
+</div><div class="hljs-line"><span class="hljs-comment line-number">4.</span>...
+</div></code></pre>
+
+<blockquote>
+  <p>H5中删除一些不经常使用的标签：这里的删除不是不让用（用了也不报错），只是按照最新标准没有语义了</p>
+</blockquote>
+
+
+
+<pre class="prettyprint with-line-number hljs-dark"><code class="hljs maxima"><div class="hljs-line"><span class="hljs-comment line-number">1.</span><span class="hljs-built_in">font</span>：之前是标记字体修改某些文字样式的，现在呢我们不建议使用了
+</div><div class="hljs-line"><span class="hljs-comment line-number">2.</span><span class="hljs-built_in">center</span>：之前是使某些内容居中，但是目前我们都是基于CSS样式控制居中，不在使用这个标签
+</div><div class="hljs-line"><span class="hljs-comment line-number">3.</span>...
+</div></code></pre>
+
+<blockquote>
+  <p>目前不管是在PC端开发还是在移动端开发，我们更应该使用H5规范的语义化标签搭建页面的结构</p>
+  
+  <p>问题： <br>
+  IE6~8中不能识别这些新增加的语义化标签，我们无法为其设置具体的样式</p>
+  
+  <p>解决： <br>
+  在当前页面的HEAD中（CSS后），我们导入一个JS插件：html5.min.js，它就是用来把页面中所有用到的不兼容的H5语义化标签进行兼容处理</p>
+  
+  <p>1、把页面中所有不兼容的标签进行替换 <br>
+  2、把CSS中使用标签选择器设置的样式（标签是H5标签）也替换成其它方式 <br>
+  …</p>
+  
+  <p>标准浏览器中不需要引用，只有IE6~8中才需要（使用条件注释来区分浏览器）</p>
+</blockquote>
+
+
+
+<pre class="prettyprint with-line-number hljs-dark"><code class="hljs xml"><div class="hljs-line"><span class="hljs-comment line-number">1.</span><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">2.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">3.</span>    <span class="hljs-comment">&lt;!--[if lt IE 9]&gt;
+</span></div><div class="hljs-line"><span class="hljs-comment line-number">4.</span>    &lt;script src="js/html5.min.js"&gt;&lt;/script&gt;
+</div><div class="hljs-line"><span class="hljs-comment line-number">5.</span>    &lt;![endif]--&gt;
+</div><div class="hljs-line"><span class="hljs-comment line-number">6.</span><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">7.</span><span class="hljs-comment">&lt;!--条件注释中的代码要严格区分大小写以及空格等细节问题--&gt;</span>
+</div></code></pre>
+
+<p><strong><code>H5中对于表单元素的升级</code></strong></p>
+
+<blockquote>
+  <p>传统表单元素 <br>
+  form <br>
+  input：text、password（暗纹输入）、button、submit、reset、file、hidden、radio、checkbox… <br>
+  button <br>
+  select <br>
+  label <br>
+  textarea <br>
+  …</p>
+  
+  <p>H5对于表单的升级 <br>
+  1、给input设置了很多新的类型 <br>
+  search <br>
+  email <br>
+  tel <br>
+  number <br>
+  range <br>
+  color <br>
+  date <br>
+  time <br>
+  …</p>
+  
+  <p>[优势] <br>
+  1)功能强大了 <br>
+  2)使用合适的类型，在移动的开发的时候，用户输入，可以调取出最符合输入内容格式的虚拟键盘，方便用户操作 <br>
+  3)部分类型提供了表单验证（内置验证机制：和我们自己写的正则验证不太一样，但是也可以凑合 [ CSS中可以验证、JS中也可以验证 ]）</p>
+  
+  <p>2、给input新增一个属性：placeholder，给表单框做默认的信息提示</p>
+  
+  <p>3、二级下拉框（select一级下拉框）</p>
+</blockquote>
+
+
+
+<pre class="prettyprint with-line-number hljs-dark"><code class="hljs xml"><div class="hljs-line"><span class="hljs-comment line-number">1.</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"department"</span> <span class="hljs-attr">list</span>=<span class="hljs-string">"departmentList"</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">2.</span><span class="hljs-tag">&lt;<span class="hljs-name">datalist</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"departmentList"</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">3.</span>    <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"市场部"</span>&gt;</span>市场部<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">4.</span>    <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"技术部"</span>&gt;</span>技术部<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">5.</span>    <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"总裁办"</span>&gt;</span>总裁办<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">6.</span><span class="hljs-tag">&lt;/<span class="hljs-name">datalist</span>&gt;</span>
+</div></code></pre>
+
+<blockquote>
+  <p>H5针对于表单元素升级的部分，在IE低版本（有的IE9和10都不兼容）中不兼容，而且没办法处理兼容，所以我们一般移动端使用这些新特性，PC端还是延续传统的操作办法；</p>
+  
+  <p>H5中的表单验证（内置规则不是特别好），所以真实项目中的表单验证依然延续传统的正则验证完成</p>
+</blockquote>
+
+<p><strong><code>placeholder兼容处理</code></strong></p>
+
+<blockquote>
+  <p>整个IE浏览器对于placeholder兼容性都不好 <br>
+  1、IE10+虽然兼容，但是文本框获取焦点后，提示信息就消失了 <br>
+  2、IE9-不兼容这个属性</p>
+</blockquote>
+
+
+
+<pre class="prettyprint with-line-number hljs-dark"><code class="language-javascript hljs"><div class="hljs-line"><span class="hljs-comment line-number">1.</span>~<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line"><span class="hljs-comment line-number">2.</span>    <span class="hljs-comment">//=&gt;获取页面中所有具备DATA-PLACE自定义属性的INPUT</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">3.</span>    <span class="hljs-keyword">var</span> inputList = <span class="hljs-built_in">document</span>.getElementsByTagName(<span class="hljs-string">'input'</span>),
+</div><div class="hljs-line"><span class="hljs-comment line-number">4.</span>        inputAry = [];
+</div><div class="hljs-line"><span class="hljs-comment line-number">5.</span>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; inputList.length; i++) {
+</div><div class="hljs-line"><span class="hljs-comment line-number">6.</span>        <span class="hljs-keyword">var</span> item = inputList[i];
+</div><div class="hljs-line"><span class="hljs-comment line-number">7.</span>        item.getAttribute(<span class="hljs-string">'data-place'</span>) !== <span class="hljs-literal">null</span> ? inputAry.push(item) : <span class="hljs-literal">null</span>;
+</div><div class="hljs-line"><span class="hljs-comment line-number">8.</span>    }
+</div><div class="hljs-line"><span class="hljs-comment line-number">9.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">10.</span>    <span class="hljs-comment">//=&gt;非IE浏览器中,我们只需要把自定义属性值存放在PLACE-HOLDER属性中即可,浏览器可以自己根据这个属性做好提示的工作</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">11.</span>    <span class="hljs-keyword">if</span> (!<span class="hljs-regexp">/(MSIE|Trident)/i</span>.test(navigator.userAgent)) {
+</div><div class="hljs-line"><span class="hljs-comment line-number">12.</span>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> k = <span class="hljs-number">0</span>; k &lt; inputAry.length; k++) {
+</div><div class="hljs-line"><span class="hljs-comment line-number">13.</span>            <span class="hljs-keyword">var</span> itemInp = inputAry[k];
+</div><div class="hljs-line"><span class="hljs-comment line-number">14.</span>            itemInp.placeholder = itemInp.getAttribute(<span class="hljs-string">'data-place'</span>);
+</div><div class="hljs-line"><span class="hljs-comment line-number">15.</span>        }
+</div><div class="hljs-line"><span class="hljs-comment line-number">16.</span>        <span class="hljs-keyword">return</span>;
+</div><div class="hljs-line"><span class="hljs-comment line-number">17.</span>    }
+</div><div class="hljs-line"><span class="hljs-comment line-number">18.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">19.</span>    <span class="hljs-comment">//=&gt;IE浏览器(包含IE EDGE):不用内置的PLACE-HOLDER,而是采用我们自己设定的方式来处理</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">20.</span>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> z = <span class="hljs-number">0</span>; z &lt; inputAry.length; z++) {
+</div><div class="hljs-line"><span class="hljs-comment line-number">21.</span>        <span class="hljs-keyword">var</span> inputItem = inputAry[z],
+</div><div class="hljs-line"><span class="hljs-comment line-number">22.</span>            inputText = inputItem.getAttribute(<span class="hljs-string">'data-place'</span>);
+</div><div class="hljs-line"><span class="hljs-comment line-number">23.</span>        inputItem.placeholder = <span class="hljs-string">''</span>;
+</div><div class="hljs-line"><span class="hljs-comment line-number">24.</span>        <span class="hljs-comment">/*
+</span></div><div class="hljs-line"><span class="hljs-comment line-number">25.</span>         * 1、新创建一个SPAN,把其存放在INPUT它爹末尾(作为INPUT的弟弟)
+</div><div class="hljs-line"><span class="hljs-comment line-number">26.</span>         * 2、给SPAN设置一定的样式
+</div><div class="hljs-line"><span class="hljs-comment line-number">27.</span>         *  相对于其父级元素定位
+</div><div class="hljs-line"><span class="hljs-comment line-number">28.</span>         *  和INPUT的基础样式类似
+</div><div class="hljs-line"><span class="hljs-comment line-number">29.</span>         * 3、INPUT或者SPAN都要绑定相关的事件行为:完成和内置PLACE-HOLDER相同的效果
+</div><div class="hljs-line"><span class="hljs-comment line-number">30.</span>         */
+</div><div class="hljs-line"><span class="hljs-comment line-number">31.</span>        <span class="hljs-keyword">var</span> spanTip = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'span'</span>);
+</div><div class="hljs-line"><span class="hljs-comment line-number">32.</span>        spanTip.innerHTML = inputText;
+</div><div class="hljs-line"><span class="hljs-comment line-number">33.</span>        spanTip.className = <span class="hljs-string">'placeLike'</span>;
+</div><div class="hljs-line"><span class="hljs-comment line-number">34.</span>        spanTip.style.cursor = <span class="hljs-string">'text'</span>;
+</div><div class="hljs-line"><span class="hljs-comment line-number">35.</span>        inputItem.parentNode.appendChild(spanTip);
+</div><div class="hljs-line"><span class="hljs-comment line-number">36.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">37.</span>        <span class="hljs-comment">//=&gt;把每一个INPUT和SPAN的索引进行存储(并且把SPAN-TIP作为属性值存储在INPUT的自定义属性上,方便后期获取使用)</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">38.</span>        inputItem.index = spanTip.index = z;
+</div><div class="hljs-line"><span class="hljs-comment line-number">39.</span>        inputItem.spanTip = spanTip;
+</div><div class="hljs-line"><span class="hljs-comment line-number">40.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">41.</span>        <span class="hljs-comment">//=&gt;SPAN的点击行为:点击SPAN让INPUT获取对应光标</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">42.</span>        spanTip.onclick = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+</div><div class="hljs-line"><span class="hljs-comment line-number">43.</span>            inputAry[<span class="hljs-keyword">this</span>.index].focus();
+</div><div class="hljs-line"><span class="hljs-comment line-number">44.</span>        };
+</div><div class="hljs-line"><span class="hljs-comment line-number">45.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">46.</span>        <span class="hljs-comment">//=&gt;控制INPUT的输入行为(建议使用DOM2事件绑定:防止后期再其它的地方也需要通过KEYUP或者KEYDOWN行为处理其它的事情)</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">47.</span>        inputItem.onkeydown = inputItem.onkeyup = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">e</span>) </span>{
+</div><div class="hljs-line"><span class="hljs-comment line-number">48.</span>            <span class="hljs-keyword">var</span> value = <span class="hljs-keyword">this</span>.value,
+</div><div class="hljs-line"><span class="hljs-comment line-number">49.</span>                spanTip = <span class="hljs-keyword">this</span>.spanTip;
+</div><div class="hljs-line"><span class="hljs-comment line-number">50.</span>            spanTip.style.display = value.length &gt; <span class="hljs-number">0</span> ? <span class="hljs-string">'none'</span> : <span class="hljs-string">'block'</span>;
+</div><div class="hljs-line"><span class="hljs-comment line-number">51.</span>        };
+</div><div class="hljs-line"><span class="hljs-comment line-number">52.</span>    }
+</div><div class="hljs-line"><span class="hljs-comment line-number">53.</span>}();
+</div></code></pre>
+
+<p>页面结构</p>
+
+
+
+<pre class="prettyprint with-line-number hljs-dark"><code class="hljs xml"><div class="hljs-line"><span class="hljs-comment line-number">1.</span><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">2.</span><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">3.</span><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">4.</span>    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">5.</span>    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>珠峰培训<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">6.</span>    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"css/reset.min.css"</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">7.</span>    <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+</span></div><div class="hljs-line"><span class="hljs-comment line-number">8.</span>        <span class="hljs-selector-class">.inputBox</span> {
+</div><div class="hljs-line"><span class="hljs-comment line-number">9.</span>            <span class="hljs-attribute">position</span>: relative;
+</div><div class="hljs-line"><span class="hljs-comment line-number">10.</span>            <span class="hljs-attribute">margin</span>: <span class="hljs-number">20px</span>;
+</div><div class="hljs-line"><span class="hljs-comment line-number">11.</span>            <span class="hljs-attribute">width</span>: <span class="hljs-number">200px</span>;
+</div><div class="hljs-line"><span class="hljs-comment line-number">12.</span>        }
+</div><div class="hljs-line"><span class="hljs-comment line-number">13.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">14.</span>        <span class="hljs-selector-class">.inputBox</span> <span class="hljs-selector-tag">input</span>, <span class="hljs-selector-class">.inputBox</span> <span class="hljs-selector-class">.placeLike</span> {
+</div><div class="hljs-line"><span class="hljs-comment line-number">15.</span>            <span class="hljs-attribute">display</span>: block;
+</div><div class="hljs-line"><span class="hljs-comment line-number">16.</span>            <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span> <span class="hljs-number">10px</span>;
+</div><div class="hljs-line"><span class="hljs-comment line-number">17.</span>            <span class="hljs-attribute">width</span>: <span class="hljs-number">178px</span>;
+</div><div class="hljs-line"><span class="hljs-comment line-number">18.</span>            <span class="hljs-attribute">height</span>: <span class="hljs-number">30px</span>;
+</div><div class="hljs-line"><span class="hljs-comment line-number">19.</span>            <span class="hljs-attribute">line-height</span>: <span class="hljs-number">30px</span>;
+</div><div class="hljs-line"><span class="hljs-comment line-number">20.</span>            <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid green;
+</div><div class="hljs-line"><span class="hljs-comment line-number">21.</span>        }
+</div><div class="hljs-line"><span class="hljs-comment line-number">22.</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">23.</span>        <span class="hljs-selector-class">.inputBox</span> <span class="hljs-selector-class">.placeLike</span> {
+</div><div class="hljs-line"><span class="hljs-comment line-number">24.</span>            <span class="hljs-attribute">position</span>: absolute;
+</div><div class="hljs-line"><span class="hljs-comment line-number">25.</span>            <span class="hljs-attribute">top</span>: <span class="hljs-number">0</span>;
+</div><div class="hljs-line"><span class="hljs-comment line-number">26.</span>            <span class="hljs-attribute">left</span>: <span class="hljs-number">0</span>;
+</div><div class="hljs-line"><span class="hljs-comment line-number">27.</span>            <span class="hljs-attribute">z-index</span>: <span class="hljs-number">100</span>;
+</div><div class="hljs-line"><span class="hljs-comment line-number">28.</span>            <span class="hljs-attribute">color</span>: <span class="hljs-number">#AAA</span>;
+</div><div class="hljs-line"><span class="hljs-comment line-number">29.</span>        }
+</div><div class="hljs-line"><span class="hljs-comment line-number">30.</span>    <span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">31.</span><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">32.</span><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">33.</span><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"inputBox"</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">34.</span>    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">data-place</span>=<span class="hljs-string">"请输入用户名"</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">35.</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">36.</span><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"inputBox"</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">37.</span>    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"password"</span> <span class="hljs-attr">data-place</span>=<span class="hljs-string">"请输入密码"</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">38.</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">39.</span><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"inputBox"</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">40.</span>    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"email"</span> <span class="hljs-attr">data-place</span>=<span class="hljs-string">"请输入邮箱"</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">41.</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">42.</span><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"js/placeholder.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">43.</span><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+</div><div class="hljs-line"><span class="hljs-comment line-number">44.</span><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</div></code></pre>
+
+<p><strong><code>H5中其它新增内容</code></strong></p>
+
+<blockquote>
+  <p>增加了新的媒体解决方案 <br>
+  音频：audio <br>
+  视频：video</p>
+  
+  <p>传统的音视频播放是基于flash来完成的，需要浏览器中安装 adobe flash player 插件</p>
+  
+  <p>现在只需要基于audio或者video播放即可，但是对于音视频的格式有限制，对于浏览器也有限制</p>
+  
+  <p>移动端对于flash的支持不好，但是基本上都支持audio和video <br>
+  PC端的IE浏览器（低版本）不支持audio和video，但是支持flash</p>
+</blockquote>
+
+<hr>
+
+<blockquote>
+  <p>H5中增加了canvas（绘图） <br>
+  它是一个画布，允许我们在JS中通过代码绘制图形以及实现一些好玩的动画</p>
+  
+  <p>百度统计图插件：Echarts就是基于canvas开发的</p>
+</blockquote>
+
+<hr>
+
+<blockquote>
+  <p>提供了很多强大的JS API</p>
+  
+  <p>API：Application Programming Interface 应用程序接口（凡是提供一个共别人调取使用的都可以称之为接口,例如：使用AJAX从服务器端获取数据，需要一个URL地址，此地址就是一个API，浏览器提供给我们很多常用的方法，每一个方法都可以叫做API）</p>
+</blockquote>
+
+<p><code>本地存储</code></p>
+
+<blockquote>
+  <p>webStorage： <br>
+  localStorage：本地信息存储 <br>
+  sessionStorage：本地会话存储</p>
+  
+  <p>在没有H5本地存储之前，我们都使用cookie做的本地存储</p>
+</blockquote>
+
+<p><code>获取本机地理位置</code></p>
+
+<blockquote>
+  <p>通过H5可以获取当前用户地理位置（精度、纬度、精准度…），再结合第三方地图（高德地图、百度地图、腾讯地图…）API接口，实现一些生活服务的推荐等</p>
+</blockquote>
+
+<p><code>提供了新的通信方式：websocket</code></p>
+
+<blockquote>
+  <p>想要实现实时通讯类的产品，基本上现在都是基于socket.io这个框架来完成的</p>
+</blockquote>
+
+<p><code>提供操作手机硬件功能的API</code></p>
+
+<blockquote>
+  <p>调取手机的重力感应器，实现摇一摇，或者实现一些小游戏 <br>
+  调取手机的摄像头或者通讯录</p>
+  
+  <p>不是所有的手机浏览器都支持这些功能，即时支持这些功能的浏览器，在实现效果上也是不理想的（不稳定、卡顿等）</p>
+</blockquote>
+
+<p><code>H5离线缓存：manifest</code></p>
+
+<blockquote>
+  <p>第一次连网请求完成页面，把信息缓存到本地，下一次即时断网的情况下，也可以看到上一次的信息</p>
+</blockquote></div></body></html>

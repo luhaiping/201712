@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>珠峰培训</title>
+    <link rel="stylesheet" href="css/reset.min.css">
+    <style>
+        #emailInp, input {
+            display: block;
+            margin: 50px;
+            width: 200px;
+            height: 35px;
+            line-height: 35px;
+            border: 1px solid #CCC;
+        }
+
+        /*#emailInp:valid {
+            border: 1px solid green;
+        }
+
+        #emailInp:invalid {
+            border: 1px solid red;
+        }*/
+    </style>
+</head>
+<body>
+<!--<form action="https://www.baidu.com/">
+    <input type="text">
+    <input type="password">
+    <input type="file">
+    <br><br><br>
+
+    &lt;!&ndash;
+        需要使用NAME进行分组,一组中只能选中一个
+        LABEL有一个FOR属性,指向对应表单元素的ID,操作LABEL中的内容,也相当于在操作表单元素（经常应用于单选或者复选框上）
+    &ndash;&gt;
+    <input type="radio" name="sex" id="man" checked><label for="man">男</label>
+    <input type="radio" name="sex" id="woman"><label for="woman">女</label>
+
+    <br><br><br>
+    <input type="checkbox" name="hobby" id="music"><label for="music">音乐</label>
+    <input type="checkbox" name="hobby" id="dance"><label for="dance">跳舞</label>
+    <input type="checkbox" name="hobby" id="study"><label for="study">学习</label>
+    <input type="checkbox" name="hobby" id="travel"><label for="travel">旅游</label>
+    <input type="checkbox" name="hobby" id="eat"><label for="eat">吃货</label>
+
+    <br><br><br>
+    <textarea id="desc"></textarea>
+
+    <br><br><br>
+    <select>
+        <option value="北京">北京</option>
+        <option value="上海">上海</option>
+        <option value="广州" selected>广州</option>
+    </select>
+
+    <br><br><br>
+    <input type="button" value="我就是个按钮">
+    <input type="submit">
+    &lt;!&ndash;
+        SUBMIT默认行为：点击按钮会跳转到FORM的ACTION对应的地址（表单提交）
+        在传统的非前后端分离项目中，我们会在ACTION中指定一个程序处理页面(一般是由后台语言(PHP\JSP\ASP...)完成),我们利用它的默认行为把数据发送给处理页面,由处理页面完成数据的存储等操作
+
+        现有前后端完全分离项目中,我们都是在JS中手动获取到用户输入的内容,并且通过AJAX等技术发送给服务器存储或者处理（此时我们需要阻止SUBMIT的默认行为）
+        &ndash;&gt;
+</form>-->
+
+<!--<input type="range" min="18" max="65" step="1" value="25">-->
+<!--<input type="color">-->
+
+<!--<input type="email" id="emailInp" placeholder="请输入常用的邮箱">
+<script src="js/jquery-1.11.3.min.js"></script>
+<script>
+    $('#emailInp').on('blur', function () {
+        //=>this.checkValidity():调取内置的验证机制,验证当前输入内容格式是否正确(空也是正确的) TRUE:正确 FALSE:不正确
+        if (this.checkValidity()) {
+            $(this).css('borderColor', 'green');
+        } else {
+            $(this).css('borderColor', 'red');
+        }
+    });
+</script>-->
+
+<input type="text" id="department" list="departmentList">
+<datalist id="departmentList">
+    <option value="市场部">市场部</option>
+    <option value="技术部">技术部</option>
+    <option value="总裁办">总裁办</option>
+</datalist>
+</body>
+</html>
