@@ -1,0 +1,30 @@
+@green: #31C27C;
+@gray: rgba(255, 255, 255, .5);
+
+.fullPage {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.transformRotate(@v) {
+  @vv: unit(@v, deg);
+  -webkit-transform: rotate(@vv);
+  transform: rotate(@vv);
+}
+
+.animation(@name,@duration:1s,@effect:linear,@delay:0s,@count:1,@mode:both) {
+  -webkit-animation: @arguments;
+  animation: @arguments;
+}
+
+.transition(@property:all,@duration:1s,@effect:linear,@delay:0s) {
+  -webkit-transition: @arguments;
+  transition: @arguments;
+}
+
+.substringText() {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

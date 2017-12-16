@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'tianmao';
+    src: url(tianmao.woff) format('woff'),
+    url(tianmao.otf) format('truetype');
+}
+
+.icon {
+    font-family: "tianmao" !important;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-stroke-width: .2px;
+}
+
+.icon_1:before {
+    content: '\E600';
+}
